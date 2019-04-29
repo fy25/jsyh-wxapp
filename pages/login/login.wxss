@@ -2,19 +2,6 @@ page {
     background-color: var(--main-color)
 }
 
-.logo {
-    height: 350rpx;
-    background-color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.logo image {
-    width: 88%;
-    height: 170rpx;
-}
-
 .form {
     padding: 100rpx;
     box-sizing: border-box;

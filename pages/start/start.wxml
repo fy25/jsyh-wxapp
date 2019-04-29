@@ -1,0 +1,4 @@
+<view class="start">
+    <image src="/images/logo-m.jpg" />
+    <text>正在进入···</text>
+</view>

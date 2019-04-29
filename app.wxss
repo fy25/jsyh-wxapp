@@ -1,8 +1,29 @@
 page {
     --main-color: #0269B8;
     --second-color: #D5AB45;
+    --bg-gray:#F5F5F5;
+    --fs18: 18rpx;
     --fs24: 24rpx;
     --fs26: 26rpx;
     --fs28: 28rpx;
     --fs30: 30rpx;
+    --fs32: 32rpx;
+    --fs34: 34rpx;
+    --fs36: 36rpx;
+    --fs38: 38rpx;
+    --fs40: 40rpx;
+}
+
+/* 公共logo摆讷 */
+.logo {
+    height: 350rpx;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo image {
+    width: 70%;
+    height: 150rpx;
 }

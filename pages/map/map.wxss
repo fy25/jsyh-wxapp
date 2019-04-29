@@ -1,4 +1,81 @@
+.map{
+    width: 100%;
+    height: 70vh;
+}
 #map {
     width: 100%;
-    height: 840rpx;
+    height: 100%;
+}
+.container{
+    width: 100%;
+    height: 30vh;
+    padding: 0 24rpx;
+    box-sizing: border-box;
+}
+.location{
+    display: flex;
+    flex-direction: column;
+    padding: 24rpx 0;
+    border-bottom: 1px solid #eeeeee;
+}
+.location text{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 10rpx 0;
+}
+.location text:first-child{
+    font-size: var(--fs30);
+    color: #333;
+    font-weight: 700;
+}
+.location text:last-child{
+    font-size: var(--fs24);
+    color: #999;
+}
+.handle{
+    display: flex;
+    align-items: center;
+    margin-top: 24rpx;
+}
+.handle .item{
+    flex: 1;
+}
+.handle .left{
+    display: flex;
+    align-items: center;
+}
+.handle .left>view{
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+.handle .left>view image{
+    width: 48rpx;
+    height: 48rpx;
+}
+.handle .left>view text{
+    font-size: var(--fs26);
+    font-size: #666;
+}
+.handle .right{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.handle .right view{
+    font-size: var(--fs28);
+    background-color:var(--main-color);
+    border-radius: 60rpx;
+    padding: 10rpx 22rpx; 
+}
+.handle .right view:first-child{
+    background-color: #fff;
+    border: 1px solid var(--main-color);
+    color: var(--main-color);
+}
+.handle .right view:last-child{
+    background-color: var(--main-color);
+    border: 1px solid #fff;
+    color: #fff;
 }

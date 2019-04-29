@@ -20,7 +20,15 @@ class Base {
                 success: (res) => {
                     console.log(res)
                     if (res.statusCode == 200) {
-                        resolve(res.data)
+                        if (res.data.code == "success") {
+                            resolve(res.data.data)
+                        } else {
+                            wx.showToast({
+                                title: res.data.message,
+                                icon: 'none',
+                                duration: 1500
+                            })
+                        }
                     } else {
                         wx.showToast({
                             title: '服务器出错',

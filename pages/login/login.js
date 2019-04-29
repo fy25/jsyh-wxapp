@@ -15,7 +15,7 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function(options) {},
+    onLoad: function (options) { },
 
     // 登录
     signIn() {
@@ -26,9 +26,9 @@ Page({
         } else if (pwd == null) {
             util.toust('请输入密码')
         } else {
+            wx.showLoading({ title: '正在登录' })
             this.getCode(name).then(res => {
                 console.log(res, "32312")
-
                 let data = {
                     action: 'get_user_info',
                     name: name,
@@ -36,8 +36,11 @@ Page({
                     code: res
                 }
                 loginApi.signIn(data).then(res => {
-                    console.log(res, "99999999999")
-                    wx.navigateTo({ url: `/pages/map/map` })
+                    let userinfo = JSON.stringify(res)
+                    wx.setStorageSync('userinfo', userinfo)
+                    console.log(userinfo, "99999999999")
+
+                    wx.redirectTo({ url: `/pages/map/map` })
                 })
             })
         }

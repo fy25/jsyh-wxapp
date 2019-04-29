@@ -1,3 +1,4 @@
+import util from "../../utils/util"
 Page({
     data: {
         markers: [{
@@ -32,6 +33,9 @@ Page({
             clickable: true
         }]
     },
+    onLoad() {
+        this.getCurrentLocation()
+    },
     regionchange(e) {
         console.log(e.type)
     },
@@ -40,5 +44,74 @@ Page({
     },
     controltap(e) {
         console.log(e.controlId)
+    },
+
+    // 定位
+    getCurrentLocation() {
+        wx.getLocation({
+            type: 'wgs84',
+            success: (res) => {
+                console.log(res)
+                const { latitude, longitude } = res
+                this.setData({
+                    latitude,
+                    longitude
+                })
+                // wx.openLocation({
+                //     latitude,
+                //     longitude,
+                //     scale: 18,
+                //     success: (res) => {
+                //         wx.chooseLocation({
+                //             success: (res) => {
+                //                 console.log(res)
+                //             }
+                //         })
+                //     }
+                // })
+            }
+        })
+    },
+
+
+    // 导航
+    gateTap() {
+        wx.getLocation({
+            type: 'wgs84',
+            success: (res) => {
+                console.log(res)
+                const { latitude, longitude } = res
+                this.setData({
+                    latitude,
+                    longitude
+                })
+                wx.openLocation({
+                    latitude,
+                    longitude,
+                    scale: 18,
+                    // success: (res) => {
+                    //     wx.chooseLocation({
+                    //         success: (res) => {
+                    //             console.log(res)
+                    //         }
+                    //     })
+                    // }
+                })
+            }
+        })
+    },
+
+
+    errToast() {
+        util.toust('功能正在开发中')
+    },
+
+
+
+    goWhere(e) {
+        let url = e.currentTarget.dataset.url
+        wx.navigateTo({
+            url: url
+        })
     }
 })

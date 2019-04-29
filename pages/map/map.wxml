@@ -1,3 +1,30 @@
+<!-- <view class="search">
+    <input type="text" placeholder="输入查询" />
+</view> -->
 <view class="map">
-    <map id="map" longitude="113.324520" latitude="23.099994" scale="14" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location></map>
+    <map id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="14" controls="{{controls}}"
+        bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}"
+        bindregionchange="regionchange" show-location></map>
+</view>
+<view class="container">
+    <view class="location">
+        <text>江苏银行（徐州分行）</text>
+        <text>江苏银行（徐州分行）</text>
+    </view>
+    <view class="handle">
+        <view class="item left">
+            <view catchtap="errToast">
+                <image src="/images/book.png" />
+                <text>查看活动</text>
+            </view>
+            <view catchtap="errToast">
+                <image src="/images/location.png" />
+                <text>历史标记</text>
+            </view>
+        </view>
+        <view class="item right">
+            <view catchtap="gateTap">导航</view>
+            <view data-url="/pages/add/add" catchtap="goWhere">添加标记</view>
+        </view>
+    </view>
 </view>
