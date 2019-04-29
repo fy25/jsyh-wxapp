@@ -1,0 +1,14 @@
+<view class="login">
+    <view class="logo">
+        <image src="/images/logo.png" />
+    </view>
+    <view class="form">
+        <view class="form-item">
+            <input type="text" placeholder="请输入工号" data-category="name" bindinput="inputTap" />
+        </view>
+        <view class="form-item">
+            <input type="password" placeholder="请输入密码" data-category="pwd" bindinput="inputTap" />
+        </view>
+        <button class="login-btn" catchtap="signIn">登录</button>
+    </view>
+</view>

@@ -1,0 +1,47 @@
+page {
+    background-color: var(--main-color)
+}
+
+.logo {
+    height: 350rpx;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo image {
+    width: 88%;
+    height: 170rpx;
+}
+
+.form {
+    padding: 100rpx;
+    box-sizing: border-box;
+}
+
+.form-item {
+    width: 100%;
+    margin: 60rpx 0;
+    background-color: #fff;
+    height: 80rpx;
+    padding: 0 20rpx;
+    box-sizing: border-box;
+    border-radius: 5rpx;
+    border: 1px solid #999;
+}
+
+.form-item input {
+    width: 100%;
+    height: 100%;
+    font-size: var(--fs26);
+}
+
+.login-btn {
+    font-size: var(--fs30);
+    background-color: var(--second-color);
+    color: #fff;
+    height: 100rpx;
+    line-height: 100rpx;
+    margin-top: 80rpx;
+}
