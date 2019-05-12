@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -13,9 +13,9 @@
 		"checkInvalidKey": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.0.4",
+	"libVersion": "2.6.6",
 	"appid": "wx936c0e0ce099cf93",
-	"projectname": "jsyh-wxapp",
+	"projectname": "%E6%B1%9F%E8%8B%8F%E9%93%B6%E8%A1%8C",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
@@ -44,15 +44,16 @@
 			"list": [
 				{
 					"id": -1,
-					"name": "添加标记",
-					"pathName": "pages/add/add",
+					"name": "point",
+					"pathName": "pages/addPoint/addPoint",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "start",
-					"pathName": "pages/start/start",
+					"name": "活动",
+					"pathName": "pages/add/add",
+					"query": "lat=34.2044&long=117.28577&markers=[{\"id\":\"ce6d0069-2bfb-4dfb-9811-f7061cc2abfa\",\"latitude\":\"34.2044\",\"longitude\":\"117.28577\",\"SIGN_NAME\":\"123\",\"SIGN_ID\":\"ce6d0069-2bfb-4dfb-9811-f7061cc2abfa\",\"STREET\":\"昆仑大道\",\"REMARK\":\"21321\",\"iconPath\":\"/images/location.png\"},{\"id\":\"12be0c51-fc14-4cc8-a3da-8e7605fdb811\",\"latitude\":\"34.199004952924476\",\"longitude\":\"117.26877552368165\",\"SIGN_NAME\":\"232\",\"SIGN_ID\":\"12be0c51-fc14-4cc8-a3da-8e7605fdb811\",\"STREET\":\"&nbsp;\",\"REMARK\":\"232\",\"iconPath\":\"/images/location.png\"},{\"id\":\"a0a76ea5-8afe-490f-9c06-0a55309e3d2e\",\"latitude\":\"34.2044\",\"longitude\":\"117.28577\",\"SIGN_NAME\":\"1\",\"SIGN_ID\":\"a0a76ea5-8afe-490f-9c06-0a55309e3d2e\",\"STREET\":\"昆仑大道\",\"REMARK\":\"undefined\",\"iconPath\":\"/images/point.png\"},{\"id\":\"417fba66-ad54-489d-94f2-8276d93ad95b\",\"latitude\":\"34.26529197330702\",\"longitude\":\"117.20795065429769\",\"SIGN_NAME\":\"火车站\",\"SIGN_ID\":\"417fba66-ad54-489d-94f2-8276d93ad95b\",\"STREET\":\"tests\",\"REMARK\":\"vs vs\",\"iconPath\":\"/images/location.png\"},{\"id\":\"5294898a-928c-4f7e-a71c-15878458dca6\",\"latitude\":\"34.18842681923679\",\"longitude\":\"117.31297832824708\",\"SIGN_NAME\":\"1\",\"SIGN_ID\":\"5294898a-928c-4f7e-a71c-15878458dca6\",\"STREET\":\"tests\",\"REMARK\":\"1\",\"iconPath\":\"/images/location.png\"},{\"id\":\"3d98b3a9-f2bc-4d56-a1e0-cc267d1464d4\",\"latitude\":\"34.25281800600377\",\"longitude\":\"117.24669456481934\",\"SIGN_NAME\":\"云龙万达\",\"SIGN_ID\":\"3d98b3a9-f2bc-4d56-a1e0-cc267d1464d4\",\"STREET\":\"和平大道\",\"REMARK\":\"请问\",\"iconPath\":\"/images/location.png\"},{\"id\":\"6dbffc0f-aaf9-4543-8ec8-d59371056683\",\"latitude\":\"39.90657598772839\",\"longitude\":\"116.40323638916016\",\"SIGN_NAME\":\"天安门\",\"SIGN_ID\":\"6dbffc0f-aaf9-4543-8ec8-d59371056683\",\"STREET\":\"东长安街\",\"REMARK\":\"123\",\"iconPath\":\"/images/location.png\"},{\"id\":\"84401b96-a834-4fb7-b016-0238c91d5354\",\"latitude\":\"=undefined&nbsp;\",\"longitude\":\"=undefined&nbsp;\",\"SIGN_NAME\":\"=undefined&nbsp;\",\"SIGN_ID\":\"84401b96-a834-4fb7-b016-0238c91d5354\",\"STREET\":\"=undefined&nbsp;\",\"REMARK\":\"=undefined&nbsp;\",\"iconPath\":\"/images/location.png\"},{\"id\":\"663ed1f6-134f-4844-bc09-02e9104b76ee\",\"latitude\":\"=undefined&nbsp;\",\"SIGN_NAME\":\"sds\",\"SIGN_ID\":\"663ed1f6-134f-4844-bc09-02e9104b76ee\",\"STREET\":\"tests\",\"REMARK\":\"undefined\",\"iconPath\":\"/images/location.png\"}]=undefined&SIGN_ID=a0a76ea5-8afe-490f-9c06-0a55309e3d2e",
 					"scene": null
 				}
 			]

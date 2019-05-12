@@ -2,23 +2,14 @@
     <image src="/images/logo.png" />
 </view>
 <view class="form">
-    <view class="form-input">
-        <input type="text" placeholder="在此添加标题" bindinput='titleInput' />
-    </view>
+    <!-- <view class='select'>
+      <view>选择区域划分</view>
+      <Select prop-array='{{selectArray}}' bind:myget='getDate'></Select>
+    </view> -->
     <view>
-        <picker bindchange="startTap" mode="date" value="{{Begin_Date}}">
+        <picker bindchange="branchTap" value="{{index}}" range="{{branchTextList}}">
             <view class="picker">
-                <view class="title">开始时间:   {{Begin_Date}}</view>
-                <view>
-                    <image src="/images/arrow-right.png" />
-                </view>
-            </view>
-        </picker>
-    </view>
-    <view>
-        <picker bindchange="endTap" mode="date" value="{{End_Date}}">
-            <view class="picker">
-                <view class="title">结束时间:   {{End_Date}}</view>
+                <view class="title">选择区域:   {{branchTextList[index]}}</view>
                 <view>
                     <image src="/images/arrow-right.png" />
                 </view>
@@ -35,8 +26,11 @@
             </view>
         </picker>
     </view>
+    <view class="form-input">
+        <input type="text" placeholder="在此添加标点名称" bindinput='nameInput' />
+    </view>
     <view class="form-textarea">
-        <textarea placeholder="在此添加活动内容" bindinput='contentInput'></textarea>
+        <textarea placeholder="在此添加备注（选填）" bindinput='tipInput'></textarea>
     </view>
     <view class="img-list">
         <view wx:for="{{tempFilePaths}}" wx:key="*">
@@ -49,6 +43,5 @@
             </view>
         </view>
     </view>
-    <button class="submit" catchtap="submitTap">提交活动</button>
-    <button class="delete" catchtap="deleteTap">删除标点</button>
+    <button class="submit" catchtap="submitTap">提交标点</button>
 </view>

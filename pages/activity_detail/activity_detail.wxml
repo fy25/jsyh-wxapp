@@ -1,0 +1,17 @@
+<view class='main'>
+  <view class='title'>江苏银行五一活动</view>
+  <view class='head'>
+    <view class='name'>活动添加：张三</view>
+    <view class='date'>2019-03-02 09:21</view>
+  </view>
+  <view class='content'>
+    <text>江苏银行某某支行根据客户年龄、参与群体进行了个性化产品推介，并通过现场互动问答，持续提高客户的参与活动的积极性.
+  进一步做好金融知识普及工作，营造良好的金融生态环境，江苏银行营业部积极响应市银行业协会及总分行号召，本次活动主要宣传打击银行卡网上非法买卖、防范通信网络诈骗、网络安全一路随行、存款保险制度等，同时针对该行特色产品，如惠多宝、智存宝、聚宝幸福卡、高收益理财等进行宣传。
+    </text>
+  </view>
+  <view class='images'>
+    <image mode='widthFix' src='https://img.52z.com/upload/news/image/20180823/20180823122912_66977.jpg'></image>
+    <image mode='widthFix' src='https://img.52z.com/upload/news/image/20180823/20180823122912_66977.jpg'></image>
+    <image mode='widthFix' src='https://img.52z.com/upload/news/image/20180823/20180823122912_66977.jpg'></image>
+  </view>
+</view>

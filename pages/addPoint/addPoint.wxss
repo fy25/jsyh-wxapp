@@ -1,0 +1,102 @@
+page {
+    background-color: var(--bg-gray);
+}
+
+.form {
+    background-color: var(--bg-gray);
+    padding: 48rpx;
+    box-sizing: border-box;
+}
+
+.form {
+    font-size: var(--fs28);
+}
+
+.form-input {
+    width: 100%;
+    background-color: #fff;
+    padding: 10rpx 20rpx;
+    box-sizing: border-box;
+    border-radius: 8rpx;
+    border: 1px solid #ccc;
+}
+
+.form-textarea {
+    width: 100%;
+    background-color: #fff;
+    padding: 10rpx 20rpx;
+    box-sizing: border-box;
+    border-radius: 14rpx;
+    border: 1px solid #ccc;
+    margin-top: 40rpx;
+}
+
+.form-textarea textarea {
+    min-height: 300rpx;
+    width: 100%;
+}
+
+.img-list {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    padding: 24rpx 0;
+}
+
+.img-list>view {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 20%;
+    margin: 10rpx 0;
+}
+
+.img-list>view image {
+    width: 100rpx;
+    height: 100rpx;
+}
+
+.add-btn {
+    width: 100rpx;
+    height: 100rpx;
+    border: 1px dashed #999999;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.add-btn text {
+    font-size: var(--fs24);
+    color: #999;
+}
+
+.add-btn text:first-child {
+    font-size: var(--fs40);
+}
+
+.submit {
+    background-color: var(--main-color);
+    color: #fff;
+    font-size: var(--fs34);
+    margin-top: 40rpx;
+}
+
+.select {
+    display: flex;
+    height: 80rpx;
+    line-height: 80rpx;
+    font-size: 30rpx;
+    margin-bottom: 20rpx;
+}
+
+.select view {
+    flex: 1
+}
+
+.select Select {
+    flex: 1;
+    height: 80rpx;
+}

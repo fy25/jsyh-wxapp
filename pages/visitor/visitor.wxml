@@ -1,0 +1,32 @@
+<view class='main'>
+    <view wx:for='{{visitorList}}' wx:key='{{index}}' class='item' bindtap='showDetail'>
+        <view class='head'>
+            <view class='left'>
+                <view>{{item.CREATEUSERNAME}}</view>
+            </view>
+            <view class='right'>{{item.CREATEDATE}}</view>
+        </view>
+        <view class='body'>
+            <view class='content'>
+                <text>受访人：{{item.CALLER_NAME}}</text>
+            </view>
+            <view class='content'>
+                <text>受访人电话：{{item.CALLER_PHONE}}</text>
+            </view>
+            <view class='content'>
+                <text>受访人状态：{{item.STATETEXT}}</text>
+            </view>
+            <view class='images'>
+                <image mode='aspectFill' src='{{item.IMG_1}}'></image>
+                <image mode='aspectFill' src='{{item.IMG_2}}'></image>
+                <image mode='aspectFill' src='{{item.IMG_3}}'></image>
+            </view>
+            <view class="btn-group">
+                <button style="background:#ff4949" id="{{item.CALLER_ID}}" catchtap="deleteTap">
+                    删除访客
+                </button>
+            </view>
+        </view>
+    </view>
+    <view class="btn-bottom" catchtap="visitorTap">添加访客</view>
+</view>

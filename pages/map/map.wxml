@@ -1,30 +1,29 @@
-<!-- <view class="search">
-    <input type="text" placeholder="输入查询" />
-</view> -->
 <view class="map">
-    <map id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="14" controls="{{controls}}"
-        bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}"
-        bindregionchange="regionchange" show-location></map>
+    <map id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="14" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange">
+        <cover-view></cover-view>
+    </map>
 </view>
 <view class="container">
     <view class="location">
-        <text>江苏银行（徐州分行）</text>
-        <text>江苏银行（徐州分行）</text>
+        <text>{{selected_name!=''?selected_name:'点击标记获取信息'}}</text>
+        <text>{{selected_remark}}</text>
     </view>
     <view class="handle">
         <view class="item left">
-            <view catchtap="errToast">
+            <view catchtap="showAct">
                 <image src="/images/book.png" />
                 <text>查看活动</text>
             </view>
             <view catchtap="errToast">
                 <image src="/images/location.png" />
-                <text>历史标记</text>
+                <text>{{markers.length>0?"关闭":"历史"}}标记</text>
             </view>
         </view>
         <view class="item right">
             <view catchtap="gateTap">导航</view>
-            <view data-url="/pages/add/add" catchtap="goWhere">添加标记</view>
+            <!-- <view data-url="/pages/add/add" catchtap="goWhere">添加标记</view> -->
+            <view bindtap="addPoint">添加{{selected_lat==''?"标记":"活动"}}</view>
         </view>
     </view>
 </view>
+<view class="logout" catchtap="logOut">退出登录</view>

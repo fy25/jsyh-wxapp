@@ -12,6 +12,15 @@ class Activity extends Base {
             data: data
         })
     }
+
+
+    //查看活动
+    getAct(data){
+      return this.post({
+        url: `/ajax/Com_PCInfo.ashx`,
+        data: data
+      })
+    }
 }
 
-export { Login }
+export { Activity }

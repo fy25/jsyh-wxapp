@@ -8,28 +8,23 @@ Page({
      */
     data: {
         tempFilePaths: [],
-        Begin_Date: "",
-        End_Date: "",
+        Caller_Phone: "",
+        Caller_Name: "",
         statelist: [{
                 value: "0",
-                label: "未开始"
+                label: "不可发掘客户"
             },
             {
                 value: "1",
-                label: "开始"
+                label: "未跟进客户"
             },
             {
                 value: "2",
-                label: "结束"
-            },
-            {
-                value: "3",
-                label: "超时"
+                label: "已跟进"
             }
         ],
-        stateTextlist: ["未开始", "开始", "结束", "超时"],
+        stateTextlist: ["不可发掘客户", "未跟进客户", "已跟进"],
         stateIndex: null,
-        Activity_Name: null,
         State: null
     },
 
@@ -39,30 +34,23 @@ Page({
     onLoad: function(options) {
         console.log(options)
         this.setData({
-            lat: options.lat,
-            long: options.long,
-            SIGN_ID: options.SIGN_ID
+            id: options.id
         })
 
     },
     titleInput(e) {
         this.setData({
-            Activity_Name: e.detail.value
+            Caller_Name: e.detail.value
+        })
+    },
+    telInput(e) {
+        this.setData({
+            Caller_Phone: e.detail.value
         })
     },
     contentInput(e) {
         this.setData({
             Remark: e.detail.value
-        })
-    },
-    startTap(e) {
-        this.setData({
-            Begin_Date: e.detail.value
-        })
-    },
-    endTap(e) {
-        this.setData({
-            End_Date: e.detail.value
         })
     },
 
@@ -90,41 +78,35 @@ Page({
     },
 
     submitTap() {
-        let { Begin_Date, End_Date, Activity_Name, State, Remark } = this.data
-        if (Activity_Name == null) {
+        let { Caller_Name, Caller_Phone, State, Remark } = this.data
+        if (Caller_Name == "") {
             wx.showToast({
-                title: '请填写活动名称',
+                title: '请输入访客名称',
                 icon: 'none'
             })
         } else if (State == null) {
             wx.showToast({
-                title: '请选择活动状态',
+                title: '请选择访客状态',
                 icon: 'none'
             })
-        } else if (Begin_Date == "") {
+        } else if (Caller_Phone == "") {
             wx.showToast({
-                title: '请选择开始时间',
-                icon: 'none'
-            })
-        } else if (End_Date == "") {
-            wx.showToast({
-                title: '请选择结束时间',
+                title: '请输入访客电话',
                 icon: 'none'
             })
         } else {
             let userid = JSON.parse(wx.getStorageSync('userinfo')).USER_ID
             add.addAct({
-                action: 'add_activity_index',
+                action: 'add_caller_index',
                 _key: "",
                 Img_1: "",
                 Img_2: "",
                 Img_3: "",
-                Activity_Name: Activity_Name,
+                Caller_Phone: Caller_Phone,
                 Remark: Remark,
-                Begin_Date: Begin_Date,
-                End_Date: End_Date,
+                Caller_Name: Caller_Name,
                 State: State,
-                Sign_ID: this.data.SIGN_ID,
+                Activity_ID: this.data.id,
                 user_id: userid
             }).then(res => {
                 wx.showToast({
@@ -147,27 +129,5 @@ Page({
 
         }
 
-    },
-    deleteTap() {
-        let userid = JSON.parse(wx.getStorageSync('userinfo')).USER_ID
-        add.addAct({
-            action: 'del_sign_index',
-            pkVal: this.data.SIGN_ID,
-            user_id: userid
-        }).then(res => {
-            console.log(res)
-            wx.showToast({
-                title: '删除成功',
-                icon: 'success',
-                duration: 1500,
-                mask: true,
-                success: () => {
-                    wx.navigateBack({
-                        delta: 1
-                    })
-                }
-            })
-        })
     }
-
 })

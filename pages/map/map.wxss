@@ -1,81 +1,122 @@
-.map{
+.map {
     width: 100%;
     height: 70vh;
 }
+
 #map {
     width: 100%;
     height: 100%;
 }
-.container{
+
+.container {
     width: 100%;
     height: 30vh;
     padding: 0 24rpx;
     box-sizing: border-box;
 }
-.location{
+
+.location {
     display: flex;
     flex-direction: column;
     padding: 24rpx 0;
     border-bottom: 1px solid #eeeeee;
 }
-.location text{
+
+.location text {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     margin: 10rpx 0;
 }
-.location text:first-child{
+
+.location text:first-child {
     font-size: var(--fs30);
     color: #333;
     font-weight: 700;
 }
-.location text:last-child{
+
+.location text:last-child {
     font-size: var(--fs24);
     color: #999;
 }
-.handle{
+
+.handle {
     display: flex;
     align-items: center;
     margin-top: 24rpx;
 }
-.handle .item{
+
+.handle .item {
     flex: 1;
 }
-.handle .left{
+
+.handle .left {
     display: flex;
     align-items: center;
 }
-.handle .left>view{
+
+.handle .left>view {
     flex: 1;
     display: flex;
     align-items: center;
 }
-.handle .left>view image{
+
+.handle .left>view image {
     width: 48rpx;
     height: 48rpx;
 }
-.handle .left>view text{
+
+.handle .left>view text {
     font-size: var(--fs26);
     font-size: #666;
 }
-.handle .right{
+
+.handle .right {
     display: flex;
     align-items: center;
     justify-content: space-around;
 }
-.handle .right view{
+
+.handle .right view {
     font-size: var(--fs28);
-    background-color:var(--main-color);
+    background-color: var(--main-color);
     border-radius: 60rpx;
-    padding: 10rpx 22rpx; 
+    padding: 10rpx 22rpx;
 }
-.handle .right view:first-child{
+
+.handle .right view:first-child {
     background-color: #fff;
     border: 1px solid var(--main-color);
     color: var(--main-color);
 }
-.handle .right view:last-child{
+
+.handle .right view:last-child {
     background-color: var(--main-color);
     border: 1px solid #fff;
     color: #fff;
+}
+
+.map cover-view {
+    width: 20rpx;
+    height: 20rpx;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: red;
+    border-radius: 50%;
+}
+
+.logout {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    color: #fff;
+    background-color: #ff4949;
+    font-size: 20rpx;
+    padding: 8rpx 14rpx;
+    border-radius: 6rpx;
 }
