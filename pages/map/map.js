@@ -1,5 +1,7 @@
 import util from "../../utils/util"
 import { Map } from "../../service/map"
+import { Config } from "../../utils/config"
+var QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
 const map = new Map()
 Page({
     data: {
@@ -23,7 +25,8 @@ Page({
             color: '#FF0000DD',
             width: 2,
             dottedLine: true
-        }]
+        }],
+        Config
     },
     onLoad() {
         this.getCurrentLocation()
@@ -122,6 +125,7 @@ Page({
 
     //添加标记
     addPoint() {
+        console.log(this.data)
         if (this.data.selected_lat == '') {
             wx.navigateTo({
                 url: '../addPoint/addPoint?lat=' + this.data.tmp_lat + '&long=' + this.data.tmp_long + '&markers=' + JSON.stringify(this.data.markers)
@@ -141,20 +145,9 @@ Page({
             success: (res) => {
                 const { latitude, longitude } = res
                 this.setData({
-                        latitude,
-                        longitude
-                    })
-                    // wx.openLocation({
-                    //     latitude,
-                    //     longitude,
-                    //     scale: 18,
-                    //     success: (res) => {
-                    //         wx.chooseLocation({
-                    //             success: (res) => {
-                    //             }
-                    //         })
-                    //     }
-                    // })
+                    latitude,
+                    longitude
+                })
             }
         })
     },
@@ -218,6 +211,57 @@ Page({
                 } else if (res.cancel) {
                     console.log('用户点击取消')
                 }
+            }
+        })
+    },
+
+    // 搜索
+    searchTap(e) {
+        var qqmapsdk = new QQMapWX({
+            key: this.data.Config.mapKey // 必填
+        });
+        let _this = this
+        qqmapsdk.geocoder({
+            //获取表单传入地址
+            address: e.detail.value, //地址参数，例：固定地址，address: '北京市海淀区彩和坊路海淀西大街74号'
+            success: function(res) { //成功后的回调
+                console.log(res);
+                _this.setData({
+                        latitude: res.result.location.lat,
+                        longitude: res.result.location.lng,
+                        tmp_lat: res.result.location.lat,
+                        tmp_long: res.result.location.lng,
+                    })
+                    // var res = res.result;
+                    // var latitude = res.location.lat;
+                    // var longitude = res.location.lng;
+                    // //根据地址解析在地图上标记解析地址位置
+                    // _this.setData({ // 获取返回结果，放到markers及poi中，并在地图展示
+                    //     markers: [{
+                    //         id: 0,
+                    //         title: res.title,
+                    //         latitude: latitude,
+                    //         longitude: longitude,
+                    //         iconPath: './resources/placeholder.png', //图标路径
+                    //         width: 20,
+                    //         height: 20,
+                    //         callout: { //可根据需求是否展示经纬度
+                    //             content: latitude + ',' + longitude,
+                    //             color: '#000',
+                    //             display: 'ALWAYS'
+                    //         }
+                    //     }],
+                    //     poi: { //根据自己data数据设置相应的地图中心坐标变量名称
+                    //         latitude: latitude,
+                    //         longitude: longitude
+                    //     }
+                    // });
+            },
+            fail: function(error) {
+                console.error(error);
+            },
+            complete: function(res) {
+                console.log(res);
             }
         })
     }
