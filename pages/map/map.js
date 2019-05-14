@@ -151,6 +151,7 @@ Page({
     getCurrentLocation() {
         wx.getLocation({
             type: 'wgs84',
+            altitude: true,
             success: (res) => {
                 const { latitude, longitude } = res
                 this.setData({
