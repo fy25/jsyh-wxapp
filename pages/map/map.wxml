@@ -3,7 +3,7 @@
     <input type="text" value="{{place}}" placeholder="搜索地点" disabled bindconfirm="searchTap" />
 </view>
 <view class="map">
-    <map id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="14" bindcontroltap="controltap"
+    <map id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="18" bindcontroltap="controltap"
         markers="{{markers}}" bindmarkertap="markertap" bindregionchange="regionchange">
         <cover-view></cover-view>
     </map>

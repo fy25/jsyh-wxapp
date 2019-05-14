@@ -42,15 +42,15 @@ Page({
                             latitude: res.latitude,
                             longitude: res.longitude
                         },
-                        success: function (res) { //成功后的回调
+                        success: function(res) { //成功后的回调
                             _this.setData({
                                 place: res.result.formatted_addresses.recommend
                             })
                         },
-                        fail: function (error) {
+                        fail: function(error) {
                             console.error(error);
                         },
-                        complete: function (res) {
+                        complete: function(res) {
                             console.log(res);
                         }
                     })
@@ -150,10 +150,10 @@ Page({
     // 定位
     getCurrentLocation() {
         wx.getLocation({
-            type: 'wgs84',
+            type: 'gcj02',
             altitude: true,
             success: (res) => {
-                const { latitude, longitude } = res
+                let { latitude, longitude } = res
                 this.setData({
                     latitude,
                     longitude
