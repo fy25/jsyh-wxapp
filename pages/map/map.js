@@ -156,7 +156,9 @@ Page({
                 let { latitude, longitude } = res
                 this.setData({
                     latitude,
-                    longitude
+                    longitude,
+                    tmp_lat: latitude,
+                    tmp_long: longitude,
                 })
             }
         })
