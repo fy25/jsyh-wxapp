@@ -1,8 +1,10 @@
-<view class="search">
-    <input type="text" placeholder="输入地点名称(例：徐州市万达广场)" bindconfirm="searchTap"/>
+<view class="search" catchtap="chooseLocation">
+    <icon type="search" size="16" color="#999" />
+    <input type="text" value="{{place}}" placeholder="搜索地点" disabled bindconfirm="searchTap" />
 </view>
 <view class="map">
-    <map id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="14" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange">
+    <map id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="14" bindcontroltap="controltap"
+        markers="{{markers}}" bindmarkertap="markertap" bindregionchange="regionchange">
         <cover-view></cover-view>
     </map>
 </view>
@@ -24,7 +26,6 @@
         </view>
         <view class="item right">
             <view catchtap="gateTap">导航</view>
-            <!-- <view data-url="/pages/add/add" catchtap="goWhere">添加标记</view> -->
             <view bindtap="addPoint">添加{{selected_lat==''?"标记":"活动"}}</view>
         </view>
     </view>
