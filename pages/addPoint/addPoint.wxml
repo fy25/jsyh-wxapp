@@ -32,7 +32,7 @@
     <view class="form-textarea">
         <textarea placeholder="在此添加备注（选填）" bindinput='tipInput'></textarea>
     </view>
-    <view class="img-list">
+    <!-- <view class="img-list">
         <view wx:for="{{tempFilePaths}}" wx:key="*">
             <image src="{{item}}" />
         </view>
@@ -42,6 +42,7 @@
                 <text>添加照片</text>
             </view>
         </view>
-    </view>
+    </view> -->
+    <upload-img bind:myevent="chooseImg" bind:deleteTap="deleteTap"></upload-img>
     <button class="submit" catchtap="submitTap">提交标点</button>
 </view>

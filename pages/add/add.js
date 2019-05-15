@@ -116,9 +116,7 @@ Page({
             add.addAct({
                 action: 'add_activity_index',
                 _key: "",
-                Img_1: "",
-                Img_2: "",
-                Img_3: "",
+                Img: "",
                 Activity_Name: Activity_Name,
                 Remark: Remark,
                 Begin_Date: Begin_Date,

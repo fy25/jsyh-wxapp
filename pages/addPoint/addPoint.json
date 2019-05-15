@@ -1,5 +1,6 @@
 {
-  "usingComponents": {
-    "Select": "/Componet/select/select"
-  }
+    "usingComponents": {
+        "Select": "/Componet/select/select",
+        "upload-img": "/Componet/upload-img/upload-img"
+    }
 }

@@ -78,18 +78,13 @@ Page({
         })
     },
 
-    chooseImg() {
-        wx.chooseImage({
-            count: 1,
-            sizeType: ['original', 'compressed'],
-            sourceType: ['album', 'camera'],
-            success: (res) => {
-                const tempFilePaths = res.tempFilePaths
-                this.setData({
-                    tempFilePaths
-                })
-            }
-        })
+    chooseImg(e) {
+        console.log(e.detail.imgList, "111")
+        this.data.Img = e.detail.imgList
+    },
+    deleteTap(e) {
+        console.log(e.detail.imgList, "222")
+        this.data.Img = e.detail.imgList
     },
     nameInput: function(e) {
         this.setData({
@@ -107,13 +102,6 @@ Page({
         }).then(res => {
             let { branchTextList } = this.data
             this.data.branchList = res
-                // console.log(res)
-                // for (let i = 0; i < res.length; i++) {
-                //     t.push({
-                //         id: res[i].USERGROUP_ID,
-                //         text: res[i].USERGROUP_NAME
-                //     })
-                // }
             if (res.length != 0) {
                 res.forEach(item => {
                     branchTextList.push(item.USERGROUP_NAME)
@@ -151,23 +139,30 @@ Page({
         })
     },
     makeImg() {
-        let that = this
-        let file = this.data.tempFilePaths[0]
-        if (typeof(file) != "undefined") {
-            wx.getFileSystemManager().readFile({
-                filePath: file, //选择图片返回的相对路径
-                encoding: 'base64', //编码格式
-                success: res => { //成功的回调
-                    console.log(res, "dui")
-                    that.data.Img = 'data:image/png;base64,' + res.data
-                },
-                fail: (err) => {
-                    console.log(err, "cuo")
-                }
-            })
-        } else {
-            return ''
-        }
+        return new Promise((resolve, reject) => {
+            let { Img } = this.data
+            var tempImg = []
+            if (Img != null && Img.length > 0) {
+                Img.forEach(item => {
+                    wx.getFileSystemManager().readFile({
+                        filePath: item, //选择图片返回的相对路径
+                        encoding: 'base64', //编码格式
+                        success: res => { //成功的回调
+                            tempImg.push(`data:image/png;base64,${res.data}`)
+                            console.log(tempImg)
+                                // this.data.Img = tempImg.join('|')
+                            resolve(tempImg.join('|'))
+                        },
+                        fail: (err) => {
+                            console.log(err, "cuo")
+                        }
+                    })
+                })
+            } else {
+                resolve([])
+            }
+
+        })
     },
 
     submitTap: function() {
@@ -190,37 +185,41 @@ Page({
         } else {
             let userid = JSON.parse(wx.getStorageSync('userinfo')).USER_ID
                 //处理图片
-            let img = this.makeImg()
+                // let img = this.makeImg()
 
-            addPoint.addMarker({
-                action: 'add_sign_index',
-                Sign_Name: this.data.name,
-                Remark: this.data.tip,
-                Longitude: this.data.long,
-                Latitude: this.data.lat,
-                Province: this.data.Province,
-                City: this.data.City,
-                District: this.data.District,
-                Street: this.data.Street,
-                State: this.data.State,
-                BUG_ID: this.data.BUG_ID,
-                Img: img,
-                user_id: userid
-            }).then(res => {
-                wx.showToast({
-                    title: '提交成功',
-                    icon: 'success',
-                    duration: 2000,
-                    mask: true,
-                    success: () => {
-                        setTimeout(() => {
-                            wx.navigateBack({
-                                delta: 1
-                            })
-                        }, 2000)
-                    }
+            this.makeImg().then(img => {
+                addPoint.addMarker({
+                    action: 'add_sign_index',
+                    Sign_Name: this.data.name,
+                    Remark: this.data.tip,
+                    Longitude: this.data.long,
+                    Latitude: this.data.lat,
+                    Province: this.data.Province,
+                    City: this.data.City,
+                    District: this.data.District,
+                    Street: this.data.Street,
+                    State: this.data.State,
+                    BUG_ID: this.data.BUG_ID,
+                    Img: img,
+                    user_id: userid
+                }).then(res => {
+                    wx.showToast({
+                        title: '提交成功',
+                        icon: 'success',
+                        duration: 2000,
+                        mask: true,
+                        success: () => {
+                            setTimeout(() => {
+                                wx.navigateBack({
+                                    delta: 1
+                                })
+                            }, 2000)
+                        }
+                    })
                 })
             })
+
+
         }
     }
 })

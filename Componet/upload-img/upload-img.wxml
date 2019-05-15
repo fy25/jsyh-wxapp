@@ -1,0 +1,14 @@
+<view class="img-list">
+    <view class="img-item" wx:for="{{imgList}}" wx:key="*">
+        <image src="{{item}}" />
+        <view class="delete" data-index="{{index}}" catchtap="deleteTap">
+            <icon type="clear" size="24" color="#999" />
+        </view>
+    </view>
+    <view wx:if="{{imgList.length<9}}">
+        <view class="add-btn" catchtap="chooseImg">
+            <text>+</text>
+            <text>添加照片</text>
+        </view>
+    </view>
+</view>
