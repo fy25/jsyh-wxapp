@@ -201,7 +201,10 @@ Page({
                     State: this.data.State,
                     BUG_ID: this.data.BUG_ID,
                     Img: img,
-                    user_id: userid
+                    user_id: userid,
+                    maxQueryStringLength: "2097151",
+                    maxUrlLength: "2097151",
+                    maxRequestLength: "40940"
                 }).then(res => {
                     wx.showToast({
                         title: '提交成功',
