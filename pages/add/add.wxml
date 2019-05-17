@@ -8,7 +8,7 @@
     <view>
         <picker bindchange="startTap" mode="date" value="{{Begin_Date}}">
             <view class="picker">
-                <view class="title">开始时间:   {{Begin_Date}}</view>
+                <view class="title">开始时间: {{Begin_Date}}</view>
                 <view>
                     <image src="/images/arrow-right.png" />
                 </view>
@@ -18,7 +18,7 @@
     <view>
         <picker bindchange="endTap" mode="date" value="{{End_Date}}">
             <view class="picker">
-                <view class="title">结束时间:   {{End_Date}}</view>
+                <view class="title">结束时间: {{End_Date}}</view>
                 <view>
                     <image src="/images/arrow-right.png" />
                 </view>
@@ -28,7 +28,7 @@
     <view>
         <picker bindchange="statehTap" value="{{stateIndex}}" range="{{stateTextlist}}">
             <view class="picker">
-                <view class="title">选择状态:   {{stateTextlist[stateIndex]}}</view>
+                <view class="title">选择状态: {{stateTextlist[stateIndex]}}</view>
                 <view>
                     <image src="/images/arrow-right.png" />
                 </view>
@@ -38,7 +38,8 @@
     <view class="form-textarea">
         <textarea placeholder="在此添加活动内容" bindinput='contentInput'></textarea>
     </view>
-    <view class="img-list">
+    <upload-img bind:myevent="chooseImg" bind:deleteTap="deleteTap"></upload-img>
+    <!-- <view class="img-list">
         <view wx:for="{{tempFilePaths}}" wx:key="*">
             <image src="{{item}}" />
         </view>
@@ -48,7 +49,7 @@
                 <text>添加照片</text>
             </view>
         </view>
-    </view>
+    </view> -->
     <button class="submit" catchtap="submitTap">提交活动</button>
     <button class="delete" catchtap="deleteTap">删除标点</button>
 </view>

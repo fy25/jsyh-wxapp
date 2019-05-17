@@ -22,17 +22,17 @@ Page({
         BUG_ID: null,
         State: null,
         statelist: [{
-                value: "0",
-                label: "未开发"
-            },
-            {
-                value: "1",
-                label: "正在开发"
-            },
-            {
-                value: "2",
-                label: "已开发"
-            }
+            value: "0",
+            label: "未开发"
+        },
+        {
+            value: "1",
+            label: "正在开发"
+        },
+        {
+            value: "2",
+            label: "已开发"
+        }
         ],
         stateTextlist: ["未开发", "正在开发", "已开发"],
         Img: null
@@ -41,7 +41,7 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function(options) {
+    onLoad: function (options) {
         this.setData({
             lat: options.lat,
             long: options.long,
@@ -69,10 +69,10 @@ Page({
                 this.data.District = res.result.address_component.district
                 this.data.Street = res.result.address_component.street
             },
-            fail: function(error) {
+            fail: function (error) {
                 console.error(error);
             },
-            complete: function(res) {
+            complete: function (res) {
                 console.log(res);
             }
         })
@@ -86,17 +86,17 @@ Page({
         console.log(e.detail.imgList, "222")
         this.data.Img = e.detail.imgList
     },
-    nameInput: function(e) {
+    nameInput: function (e) {
         this.setData({
             name: e.detail.value
         })
     },
-    tipInput: function(e) {
+    tipInput: function (e) {
         this.setData({
             tip: e.detail.value
         })
     },
-    getBugId: function() {
+    getBugId: function () {
         addPoint.getBugId({
             action: 'get_user_group_index'
         }).then(res => {
@@ -132,7 +132,7 @@ Page({
         })
     },
 
-    getDate: function(e) {
+    getDate: function (e) {
         let tmp_id = this.data.selectArray[e.detail.id].id
         this.setData({
             tmp_id: tmp_id
@@ -149,8 +149,6 @@ Page({
                         encoding: 'base64', //编码格式
                         success: res => { //成功的回调
                             tempImg.push(`data:image/png;base64,${res.data}`)
-                            console.log(tempImg)
-                                // this.data.Img = tempImg.join('|')
                             resolve(tempImg.join('|'))
                         },
                         fail: (err) => {
@@ -165,7 +163,24 @@ Page({
         })
     },
 
-    submitTap: function() {
+    // 上传图片
+    upLoadImg() {
+        this.makeImg().then(res => {
+            console.log(res)
+            for (let i = 0; i < res.length; i++) {
+                addPoint.addMarker({
+                    action: 'upload_pictures_img',
+                    Img: res[i],
+                    user_id: JSON.parse(wx.getStorageSync('userinfo')).USER_ID,
+                    name: 'Sign'
+                })
+            }
+        })
+    },
+
+
+
+    submitTap: function () {
         let { name, State, BUG_ID } = this.data
         if (name == "") {
             wx.showToast({
@@ -184,8 +199,8 @@ Page({
             })
         } else {
             let userid = JSON.parse(wx.getStorageSync('userinfo')).USER_ID
-                //处理图片
-                // let img = this.makeImg()
+            //处理图片
+            // let img = this.makeImg()
 
             this.makeImg().then(img => {
                 addPoint.addMarker({
@@ -226,3 +241,4 @@ Page({
         }
     }
 })
+

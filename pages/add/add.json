@@ -1,3 +1,5 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "upload-img": "/Componet/upload-img/upload-img"
+  }
 }

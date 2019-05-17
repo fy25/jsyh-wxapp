@@ -13,9 +13,9 @@ class Base {
             wx.request({
                 url: url,
                 data: params.data,
-                method: params.method,
+                method: params.type,
                 header: {
-                    'content-type': 'application/json',
+                    'content-type': 'application/x-www-form-urlencoded',
                 },
                 success: (res) => {
                     console.log(res)

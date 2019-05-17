@@ -17,9 +17,7 @@
                 <text>受访人状态：{{item.STATETEXT}}</text>
             </view>
             <view class='images'>
-                <image mode='aspectFill' src='{{item.IMG_1}}'></image>
-                <image mode='aspectFill' src='{{item.IMG_2}}'></image>
-                <image mode='aspectFill' src='{{item.IMG_3}}'></image>
+                <image mode='aspectFill' src='{{Config.serverUrl+item.IMG}}'></image>
             </view>
             <view class="btn-group">
                 <button style="background:#ff4949" id="{{item.CALLER_ID}}" catchtap="deleteTap">

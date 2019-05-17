@@ -1,4 +1,5 @@
 import { Activity } from "../../service/activity"
+import { Config } from "../../utils/config"
 const act = new Activity()
 
 Page({
@@ -7,9 +8,10 @@ Page({
      * 页面的初始数据
      */
     data: {
-        act_array: []
+        act_array: [],
+        Config
     },
-    showDetail: function() {
+    showDetail: function () {
         wx.navigateTo({
             url: '../activity_detail/activity_detail',
         })
@@ -17,7 +19,7 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function(options) {
+    onLoad: function (options) {
         this.data.id = options.id
         this.getAct()
     },

@@ -11,21 +11,21 @@ Page({
         Begin_Date: "",
         End_Date: "",
         statelist: [{
-                value: "0",
-                label: "未开始"
-            },
-            {
-                value: "1",
-                label: "开始"
-            },
-            {
-                value: "2",
-                label: "结束"
-            },
-            {
-                value: "3",
-                label: "超时"
-            }
+            value: "0",
+            label: "未开始"
+        },
+        {
+            value: "1",
+            label: "开始"
+        },
+        {
+            value: "2",
+            label: "结束"
+        },
+        {
+            value: "3",
+            label: "超时"
+        }
         ],
         stateTextlist: ["未开始", "开始", "结束", "超时"],
         stateIndex: null,
@@ -36,7 +36,7 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function(options) {
+    onLoad: function (options) {
         console.log(options)
         this.setData({
             lat: options.lat,
@@ -75,17 +75,38 @@ Page({
         })
     },
 
-    chooseImg() {
-        wx.chooseImage({
-            count: 9,
-            sizeType: ['original', 'compressed'],
-            sourceType: ['album', 'camera'],
-            success: (res) => {
-                const tempFilePaths = res.tempFilePaths
-                this.setData({
-                    tempFilePaths
+    chooseImg(e) {
+        console.log(e.detail.imgList, "111")
+        this.data.Img = e.detail.imgList
+    },
+    deleteTap(e) {
+        console.log(e.detail.imgList, "222")
+        this.data.Img = e.detail.imgList
+    },
+    makeImg() {
+        return new Promise((resolve, reject) => {
+            let { Img } = this.data
+            var tempImg = []
+            if (Img != null && Img.length > 0) {
+                Img.forEach(item => {
+                    wx.getFileSystemManager().readFile({
+                        filePath: item, //选择图片返回的相对路径
+                        encoding: 'base64', //编码格式
+                        success: res => { //成功的回调
+                            tempImg.push(`data:image/png;base64,${res.data}`)
+                            console.log(tempImg)
+                            console.log(tempImg.join('|'))
+                            resolve(tempImg.join('|'))
+                        },
+                        fail: (err) => {
+                            console.log(err, "cuo")
+                        }
+                    })
                 })
+            } else {
+                resolve([])
             }
+
         })
     },
 
@@ -113,33 +134,38 @@ Page({
             })
         } else {
             let userid = JSON.parse(wx.getStorageSync('userinfo')).USER_ID
-            add.addAct({
-                action: 'add_activity_index',
-                _key: "",
-                Img: "",
-                Activity_Name: Activity_Name,
-                Remark: Remark,
-                Begin_Date: Begin_Date,
-                End_Date: End_Date,
-                State: State,
-                Sign_ID: this.data.SIGN_ID,
-                user_id: userid
-            }).then(res => {
-                wx.showToast({
-                    title: '提交成功',
-                    icon: 'success',
-                    duration: 2000,
-                    mask: true,
-                    success: () => {
-                        setTimeout(() => {
-                            wx.navigateBack({
-                                delta: 1
-                            })
-                        }, 2000)
-                    }
-                })
 
+            this.makeImg().then(img => {
+                add.addAct({
+                    action: 'add_activity_index',
+                    _key: "",
+                    Img: img,
+                    Activity_Name: Activity_Name,
+                    Remark: Remark,
+                    Begin_Date: Begin_Date,
+                    End_Date: End_Date,
+                    State: State,
+                    Sign_ID: this.data.SIGN_ID,
+                    user_id: userid
+                }).then(res => {
+                    wx.showToast({
+                        title: '提交成功',
+                        icon: 'success',
+                        duration: 2000,
+                        mask: true,
+                        success: () => {
+                            setTimeout(() => {
+                                wx.navigateBack({
+                                    delta: 1
+                                })
+                            }, 2000)
+                        }
+                    })
+
+                })
             })
+
+
 
 
 

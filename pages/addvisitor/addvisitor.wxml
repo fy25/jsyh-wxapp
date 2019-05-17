@@ -21,16 +21,6 @@
     <view class="form-textarea">
         <textarea placeholder="在此添加活动内容" bindinput='contentInput'></textarea>
     </view>
-    <view class="img-list">
-        <view wx:for="{{tempFilePaths}}" wx:key="*">
-            <image src="{{item}}" />
-        </view>
-        <view>
-            <view class="add-btn" catchtap="chooseImg">
-                <text>+</text>
-                <text>添加照片</text>
-            </view>
-        </view>
-    </view>
+    <upload-img bind:myevent="chooseImg" bind:deleteTap="deleteTap"></upload-img>
     <button class="submit" catchtap="submitTap">提交活动</button>
 </view>
