@@ -73,13 +73,13 @@
 
 .images {
     display: flex;
-    justify-content: space-between;
     margin-top: 35rpx;
 }
 
 .body image {
     width: 178rpx;
     height: 178rpx;
+    margin: 0 10rpx;
 }
 
 .btn-bottom {

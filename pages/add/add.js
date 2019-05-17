@@ -11,21 +11,21 @@ Page({
         Begin_Date: "",
         End_Date: "",
         statelist: [{
-            value: "0",
-            label: "未开始"
-        },
-        {
-            value: "1",
-            label: "开始"
-        },
-        {
-            value: "2",
-            label: "结束"
-        },
-        {
-            value: "3",
-            label: "超时"
-        }
+                value: "0",
+                label: "未开始"
+            },
+            {
+                value: "1",
+                label: "开始"
+            },
+            {
+                value: "2",
+                label: "结束"
+            },
+            {
+                value: "3",
+                label: "超时"
+            }
         ],
         stateTextlist: ["未开始", "开始", "结束", "超时"],
         stateIndex: null,
@@ -36,7 +36,7 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onLoad: function(options) {
         console.log(options)
         this.setData({
             lat: options.lat,
@@ -94,9 +94,9 @@ Page({
                         encoding: 'base64', //编码格式
                         success: res => { //成功的回调
                             tempImg.push(`data:image/png;base64,${res.data}`)
-                            console.log(tempImg)
-                            console.log(tempImg.join('|'))
-                            resolve(tempImg.join('|'))
+                            if (tempImg.length == Img.length) {
+                                resolve(tempImg.join("|"))
+                            }
                         },
                         fail: (err) => {
                             console.log(err, "cuo")

@@ -1,5 +1,5 @@
 <view class='main'>
-  <view wx:for='{{act_array}}' wx:key='{{index}}' class='item' bindtap='showDetail'>
+  <view wx:for='{{act_array}}' wx:key='{{index}}' class='item'>
     <view class='head'>
       <view class='left'>
         <image src='{{item.IMG_1}}'></image>
@@ -13,9 +13,7 @@
         <text>{{item.REMARK}}</text>
       </view>
       <view class='images'>
-        <image mode='aspectFill' src='{{item.IMG_1}}'></image>
-        <image mode='aspectFill' src='{{item.IMG_2}}'></image>
-        <image mode='aspectFill' src='{{item.IMG_3}}'></image>
+        <image mode='aspectFill' wx:for="{{item.imgList}}" wx:key="*" src='{{item}}'></image>
       </view>
       <view class="btn-group">
         <button style="background:#ff4949" id="{{item.ACTIVITY_ID}}" catchtap="deleteTap">

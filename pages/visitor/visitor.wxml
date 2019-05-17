@@ -17,7 +17,7 @@
                 <text>受访人状态：{{item.STATETEXT}}</text>
             </view>
             <view class='images'>
-                <image mode='aspectFill' src='{{Config.serverUrl+item.IMG}}'></image>
+                <image mode='aspectFill' wx:for="{{item.imgList}}" wx:key="*" src='{{item}}'></image>
             </view>
             <view class="btn-group">
                 <button style="background:#ff4949" id="{{item.CALLER_ID}}" catchtap="deleteTap">

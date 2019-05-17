@@ -11,7 +11,7 @@ Page({
         act_array: [],
         Config
     },
-    showDetail: function () {
+    showDetail: function() {
         wx.navigateTo({
             url: '../activity_detail/activity_detail',
         })
@@ -19,7 +19,7 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onLoad: function(options) {
         this.data.id = options.id
         this.getAct()
     },
@@ -52,6 +52,17 @@ Page({
                             item.STATETEXT = "已跟进";
                             break;
                     }
+                    let imgList = []
+                    if (item.IMG.indexOf(",") != -1) {
+                        let temp = item.IMG.split(",");
+                        console.log(temp, "jsjsjjsjsjsj")
+                        temp.forEach(item => {
+                            imgList.push(`${Config.serverUrl}${item}`);
+                        });
+                    } else {
+                        imgList.push(`${Config.serverUrl}${item.IMG}`);
+                    }
+                    item.imgList = imgList
                 });
             }
             this.setData({

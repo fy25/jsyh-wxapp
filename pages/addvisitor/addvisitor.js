@@ -11,17 +11,17 @@ Page({
         Caller_Phone: "",
         Caller_Name: "",
         statelist: [{
-            value: "0",
-            label: "不可发掘客户"
-        },
-        {
-            value: "1",
-            label: "未跟进客户"
-        },
-        {
-            value: "2",
-            label: "已跟进"
-        }
+                value: "0",
+                label: "不可发掘客户"
+            },
+            {
+                value: "1",
+                label: "未跟进客户"
+            },
+            {
+                value: "2",
+                label: "已跟进"
+            }
         ],
         stateTextlist: ["不可发掘客户", "未跟进客户", "已跟进"],
         stateIndex: null,
@@ -31,7 +31,7 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onLoad: function(options) {
         console.log(options)
         this.setData({
             id: options.id
@@ -82,7 +82,9 @@ Page({
                         encoding: 'base64', //编码格式
                         success: res => { //成功的回调
                             tempImg.push(`data:image/png;base64,${res.data}`)
-                            resolve(tempImg.join('|'))
+                            if (tempImg.length == Img.length) {
+                                resolve(tempImg.join("|"))
+                            }
                         },
                         fail: (err) => {
                             console.log(err, "cuo")

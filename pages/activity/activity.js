@@ -1,4 +1,5 @@
 import { Activity } from "../../service/activity"
+import { Config } from "../../utils/config"
 const act = new Activity()
 
 Page({
@@ -7,7 +8,8 @@ Page({
      * 页面的初始数据
      */
     data: {
-        act_array: []
+        act_array: [],
+        Config
     },
     showDetail: function() {
         wx.navigateTo({
@@ -34,6 +36,19 @@ Page({
             user_id: userid
         }).then(res => {
             console.log(res)
+            res.forEach(item => {
+                let imgList = []
+                if (item.IMG.indexOf(",") != -1) {
+                    let temp = item.IMG.split(",");
+                    console.log(temp, "jsjsjjsjsjsj")
+                    temp.forEach(item => {
+                        imgList.push(`${Config.serverUrl}${item}`);
+                    });
+                } else {
+                    imgList.push(`${Config.serverUrl}${item.IMG}`);
+                }
+                item.imgList = imgList
+            });
             this.setData({ act_array: res })
         })
     },
