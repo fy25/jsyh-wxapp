@@ -1,5 +1,5 @@
 <view class='main'>
-    <view wx:for='{{visitorList}}' wx:key='{{index}}' class='item' bindtap='showDetail'>
+    <view wx:for='{{visitorList}}' wx:key='{{index}}' class='item'>
         <view class='head'>
             <view class='left'>
                 <view>{{item.CREATEUSERNAME}}</view>
