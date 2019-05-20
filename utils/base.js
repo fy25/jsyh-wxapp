@@ -18,13 +18,15 @@ class Base {
                     'content-type': 'application/x-www-form-urlencoded',
                 },
                 success: (res) => {
-                    console.log(res)
                     if (res.statusCode == 200) {
-                        if (res.data.code == "success") {
-                            resolve(res.data.data)
+                        let temp = JSON.stringify(res.data)
+                        temp = JSON.parse(temp)
+
+                        if (temp.code == "success") {
+                            resolve(temp.data)
                         } else {
                             wx.showToast({
-                                title: res.data.message,
+                                title: temp.message,
                                 icon: 'none',
                                 duration: 1500
                             })

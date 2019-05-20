@@ -3,6 +3,19 @@
 </view>
 <view class="form">
     <view>
+        <picker bindchange="publicTap" value="{{publicIndex}}" range="{{publicTextList}}">
+            <view class="picker">
+                <view class="title">选择权限:   {{publicTextList[publicIndex]}}</view>
+                <view>
+                    <image src="/images/arrow-right.png" />
+                </view>
+            </view>
+        </picker>
+    </view>
+    <view class="form-input">
+        <input type="text" placeholder="在此添加标点名称" bindinput='nameInput' />
+    </view>
+    <view>
         <picker bindchange="branchTap" value="{{index}}" range="{{branchTextList}}">
             <view class="picker">
                 <view class="title">选择区域:   {{branchTextList[index]}}</view>
@@ -21,9 +34,6 @@
                 </view>
             </view>
         </picker>
-    </view>
-    <view class="form-input">
-        <input type="text" placeholder="在此添加标点名称" bindinput='nameInput' />
     </view>
     <view class="form-textarea">
         <textarea placeholder="在此添加备注（选填）" bindinput='tipInput'></textarea>

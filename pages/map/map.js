@@ -77,7 +77,7 @@ Page({
             if (id == this.data.markers[i].id) {
                 var markers = 'markers[' + i + '].iconPath';
                 this.setData({
-                    [markers]: '/images/point.png',
+                    [markers]: '/images/location.png',
                     active_index: i,
                     active_id: id,
                     selected_lat: this.data.markers[i].latitude,
@@ -118,11 +118,13 @@ Page({
                         id: res[i].SIGN_ID,
                         latitude: res[i].LATITUDE,
                         longitude: res[i].LONGITUDE,
+                        width: 30,
+                        height: 30,
                         SIGN_NAME: res[i].SIGN_NAME,
                         SIGN_ID: res[i].SIGN_ID,
                         STREET: res[i].STREET,
-                        REMARK: res[i].REMARK,
-                        iconPath: '/images/location.png'
+                        REMARK: decodeURI(res[i].REMARK),
+                        iconPath: res[i].ISPUBLIC == '1' ? '/images/location-per.png' : '/images/location-pub.png'
                     })
                 }
                 that.setData({

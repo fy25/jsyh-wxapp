@@ -33,21 +33,26 @@ Page({
             pageIndex: '1',
             pageSize: '10',
             is_all: '0',
-            user_id: userid
+            user_id: userid,
+            sign_id: this.data.SIGN_ID
         }).then(res => {
-            console.log(res)
             res.forEach(item => {
+                item.REMARK = decodeURI(item.REMARK)
                 let imgList = []
-                if (item.IMG.indexOf(",") != -1) {
-                    let temp = item.IMG.split(",");
-                    console.log(temp, "jsjsjjsjsjsj")
-                    temp.forEach(item => {
-                        imgList.push(`${Config.serverUrl}${item}`);
-                    });
+                if (item.IMG != "&nbsp;") {
+                    if (item.IMG.indexOf(",") != -1) {
+                        let temp = item.IMG.split(",");
+                        temp.forEach(item => {
+                            imgList.push(`${Config.serverUrl}${item}`);
+                        });
+                    } else {
+                        imgList.push(`${Config.serverUrl}${item.IMG}`);
+                    }
+                    item.imgList = imgList
+
                 } else {
-                    imgList.push(`${Config.serverUrl}${item.IMG}`);
+                    item.IMG = []
                 }
-                item.imgList = imgList
             });
             this.setData({ act_array: res })
         })
@@ -76,6 +81,12 @@ Page({
                     this.getAct()
                 }
             })
+        })
+    },
+    previewTap(e) {
+        wx.previewImage({
+            current: e.currentTarget.dataset.img, // 当前显示图片的http链接
+            urls: [e.currentTarget.dataset.img]
         })
     }
 })

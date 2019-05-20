@@ -52,7 +52,7 @@ Page({
     },
     contentInput(e) {
         this.setData({
-            Remark: e.detail.value
+            Remark: encodeURI(e.detail.value)
         })
     },
     startTap(e) {

@@ -3,13 +3,26 @@
     <input type="text" value="{{place}}" placeholder="搜索地点" disabled bindconfirm="searchTap" />
 </view>
 <view class="map">
-    <map id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="18" bindcontroltap="controltap"
-        markers="{{markers}}" bindmarkertap="markertap" bindregionchange="regionchange">
+    <map id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="18" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" bindregionchange="regionchange">
         <cover-view></cover-view>
     </map>
 </view>
 <view class="container">
     <view class="location">
+        <view class="location-tip">
+            <view class="location-item">
+                <image src="/images/location-per.png" />
+                <text>私有标记</text>
+            </view>
+            <view class="location-item">
+                <image src="/images/location-pub.png" />
+                <text>公有标记</text>
+            </view>
+            <view class="location-item">
+                <image src="/images/location.png" />
+                <text>选中标记</text>
+            </view>
+        </view>
         <text>{{selected_name!=''?selected_name:'点击标记获取信息'}}</text>
         <text>{{selected_remark}}</text>
     </view>

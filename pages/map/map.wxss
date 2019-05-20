@@ -22,6 +22,22 @@
     border-bottom: 1px solid #eeeeee;
 }
 
+.location-tip {
+    display: flex;
+    align-items: center;
+}
+
+.location-item {
+    display: flex;
+    align-items: center;
+    margin-right: 10rpx;
+}
+
+.location-item image {
+    width: 40rpx;
+    height: 40rpx;
+}
+
 .location text {
     text-overflow: ellipsis;
     white-space: nowrap;

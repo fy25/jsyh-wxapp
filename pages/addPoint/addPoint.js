@@ -19,8 +19,10 @@ Page({
         branchTextList: [],
         index: null,
         stateIndex: null,
+        publicIndex: null,
         BUG_ID: null,
         State: null,
+        IsPublic: null,
         statelist: [{
                 value: "0",
                 label: "未开发"
@@ -34,6 +36,16 @@ Page({
                 label: "已开发"
             }
         ],
+        publicList: [{
+                value: 0,
+                label: "对公"
+            },
+            {
+                value: 1,
+                label: "零售"
+            },
+        ],
+        publicTextList: ["对公", "零售"],
         stateTextlist: ["未开发", "正在开发", "已开发"],
         Img: null,
         tempImg: []
@@ -94,7 +106,7 @@ Page({
     },
     tipInput: function(e) {
         this.setData({
-            tip: e.detail.value
+            tip: encodeURI(e.detail.value)
         })
     },
     getBugId: function() {
@@ -105,7 +117,7 @@ Page({
             this.data.branchList = res
             if (res.length != 0) {
                 res.forEach(item => {
-                    branchTextList.push(item.USERGROUP_NAME)
+                    branchTextList.push(`${item.USERGROUP_CODE}${item.USERGROUP_NAME}`)
                 })
             }
             this.setData({
@@ -130,6 +142,15 @@ Page({
         this.setData({
             stateIndex: e.detail.value,
             State: statelist[e.detail.value].value
+        })
+    },
+
+    publicTap(e) {
+        let { publicList } = this.data
+        console.log(e.detail.value)
+        this.setData({
+            publicIndex: e.detail.value,
+            IsPublic: publicList[e.detail.value].value
         })
     },
 
@@ -187,7 +208,7 @@ Page({
 
 
     submitTap: function() {
-        let { name, State, BUG_ID } = this.data
+        let { name, State, BUG_ID, IsPublic } = this.data
         if (name == "") {
             wx.showToast({
                 title: '请填写标注名称！',
@@ -201,6 +222,11 @@ Page({
         } else if (BUG_ID == null) {
             wx.showToast({
                 title: '请选择区域',
+                icon: 'none'
+            })
+        } else if (IsPublic == null) {
+            wx.showToast({
+                title: '请选择权限',
                 icon: 'none'
             })
         } else {
@@ -223,9 +249,7 @@ Page({
                     BUG_ID: this.data.BUG_ID,
                     Img: img,
                     user_id: userid,
-                    maxQueryStringLength: "2097151",
-                    maxUrlLength: "2097151",
-                    maxRequestLength: "40940"
+                    IsPublic: IsPublic
                 }).then(res => {
                     wx.showToast({
                         title: '提交成功',

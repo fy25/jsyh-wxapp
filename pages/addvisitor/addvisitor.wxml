@@ -6,7 +6,7 @@
         <input type="text" placeholder="请输入访客名称" bindinput='titleInput' />
     </view>
     <view class="form-input">
-        <input type="text" placeholder="请输入访客电话" bindinput='telInput' />
+        <input type="number" maxlength="11" placeholder="请输入访客电话" bindinput='telInput' />
     </view>
     <view>
         <picker bindchange="statehTap" value="{{stateIndex}}" range="{{stateTextlist}}">
@@ -22,5 +22,5 @@
         <textarea placeholder="在此添加活动内容" bindinput='contentInput'></textarea>
     </view>
     <upload-img bind:myevent="chooseImg" bind:deleteTap="deleteTap"></upload-img>
-    <button class="submit" catchtap="submitTap">提交活动</button>
+    <button class="submit" catchtap="submitTap">提交访客</button>
 </view>

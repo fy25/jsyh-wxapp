@@ -53,16 +53,21 @@ Page({
                             break;
                     }
                     let imgList = []
-                    if (item.IMG.indexOf(",") != -1) {
-                        let temp = item.IMG.split(",");
-                        console.log(temp, "jsjsjjsjsjsj")
-                        temp.forEach(item => {
-                            imgList.push(`${Config.serverUrl}${item}`);
-                        });
+                    if (item.IMG != "&nbsp;") {
+                        if (item.IMG.indexOf(",") != -1) {
+                            let temp = item.IMG.split(",");
+                            console.log(temp, "jsjsjjsjsjsj")
+                            temp.forEach(item => {
+                                imgList.push(`${Config.serverUrl}${item}`);
+                            });
+                        } else {
+                            imgList.push(`${Config.serverUrl}${item.IMG}`);
+                        }
+                        item.imgList = imgList
+
                     } else {
-                        imgList.push(`${Config.serverUrl}${item.IMG}`);
+                        item.IMG = []
                     }
-                    item.imgList = imgList
                 });
             }
             this.setData({
@@ -95,6 +100,12 @@ Page({
                     this.getAct()
                 }
             })
+        })
+    },
+    previewTap(e) {
+        wx.previewImage({
+            current: e.currentTarget.dataset.img, // 当前显示图片的http链接
+            urls: [e.currentTarget.dataset.img]
         })
     }
 })
