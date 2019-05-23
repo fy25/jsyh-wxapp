@@ -17,10 +17,19 @@ class Base {
                 header: {
                     'content-type': 'application/x-www-form-urlencoded',
                 },
+                dataType: 'json',
                 success: (res) => {
                     if (res.statusCode == 200) {
-                        let temp = JSON.stringify(res.data)
-                        temp = JSON.parse(temp)
+                        // console.log(JSON.parse(res.data.replace(/\s+/g, "")))
+
+                        // temp = JSON.parse(temp.replace(/\s+/g, ""))
+                        let temp = null;
+                        console.log(temp)
+                        if (typeof res.data == "string") {
+                            temp = JSON.parse(res.data.replace(/\s+/g, ""))
+                        } else {
+                            temp = res.data
+                        }
 
                         if (temp.code == "success") {
                             resolve(temp.data)

@@ -33,7 +33,7 @@ Page({
             action: "get_caller_index",
             pageIndex: "1",
             pageSize: "10",
-            is_all: "0",
+            is_all: "1",
             activity_id: this.data.id,
             user_id: userid
         };

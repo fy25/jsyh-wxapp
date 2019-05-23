@@ -108,7 +108,7 @@ Page({
                 action: 'get_sign_index',
                 pageIndex: '1',
                 pageSize: '100',
-                is_all: '0',
+                is_all: '1',
                 user_id: userid
             }).then(res => {
                 console.log(res)

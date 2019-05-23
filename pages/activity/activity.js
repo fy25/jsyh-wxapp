@@ -32,7 +32,7 @@ Page({
             action: 'get_activity_index',
             pageIndex: '1',
             pageSize: '10',
-            is_all: '0',
+            is_all: '1',
             user_id: userid,
             sign_id: this.data.SIGN_ID
         }).then(res => {
