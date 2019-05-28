@@ -9,7 +9,8 @@
     "pages/index/index",
     "pages/add/add",
     "pages/visitor/visitor",
-    "pages/addvisitor/addvisitor"
+    "pages/addvisitor/addvisitor",
+    "pages/pointView/pointView"
   ],
   "window": {
     "backgroundTextStyle": "light",

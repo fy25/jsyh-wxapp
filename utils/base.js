@@ -17,16 +17,21 @@ class Base {
                 header: {
                     'content-type': 'application/x-www-form-urlencoded',
                 },
+                dataType: 'json',
                 success: (res) => {
                     if (res.statusCode == 200) {
-                        let temp = JSON.stringify(res.data)
-                        temp = JSON.parse(temp)
-
-                        if (temp.code == "success") {
-                            resolve(temp.data)
+                        let source = res.data
+                        if (typeof source == 'object') {
+                            source = source
+                        } else {
+                            source = source.replace(/[\r\n]/g, "")
+                            source = JSON.parse(source)
+                        }
+                        if (source.code == "success") {
+                            resolve(source.data)
                         } else {
                             wx.showToast({
-                                title: temp.message,
+                                title: source.message,
                                 icon: 'none',
                                 duration: 1500
                             })
