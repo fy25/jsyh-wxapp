@@ -1,0 +1,24 @@
+<view class='main'>
+    <view class='item'>
+        <view class='head'>
+            <view class='left'>
+                <view>{{data.ISPUBLIC=='0'?'公司部标记':'零售部标记'}}</view>
+            </view>
+            <!-- <view class='right'>3123</view> -->
+        </view>
+        <view class='body'>
+            <view class='title'>标记名称：{{data.SIGN_NAME}}</view>
+            <view class='content'>
+                <text>标记备注：{{data.REMARK}}</text>
+            </view>
+            <view class="btn-group">
+                <button style="background:#0269B8" id="{{data.SIGN_ID}}" catchtap="editTap">
+                    修改标记
+                </button>
+                <button style="background:#ff4949" id="{{data.SIGN_ID}}" catchtap="deleteTap">
+                    删除标记
+                </button>
+            </view>
+        </view>
+    </view>
+</view>

@@ -20,22 +20,18 @@ class Base {
                 dataType: 'json',
                 success: (res) => {
                     if (res.statusCode == 200) {
-                        // console.log(JSON.parse(res.data.replace(/\s+/g, "")))
-
-                        // temp = JSON.parse(temp.replace(/\s+/g, ""))
-                        let temp = null;
-                        console.log(temp)
-                        if (typeof res.data == "string") {
-                            temp = JSON.parse(res.data.replace(/\s+/g, ""))
+                        let source = res.data
+                        if (typeof source == 'object') {
+                            source = source
                         } else {
-                            temp = res.data
+                            source = source.replace(/[\r\n]/g, "")
+                            source = JSON.parse(source)
                         }
-
-                        if (temp.code == "success") {
-                            resolve(temp.data)
+                        if (source.code == "success") {
+                            resolve(source.data)
                         } else {
                             wx.showToast({
-                                title: temp.message,
+                                title: source.message,
                                 icon: 'none',
                                 duration: 1500
                             })

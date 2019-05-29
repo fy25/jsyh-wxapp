@@ -38,6 +38,7 @@ Page({
      */
     onLoad: function(options) {
         console.log(options)
+        this.data.options = options
         this.setData({
             lat: options.lat,
             long: options.long,

@@ -19,7 +19,6 @@ Page({
     },
     onLoad() {
         this.getCurrentLocation()
-
     },
     onShow() {
         this.getMarkers()
@@ -94,61 +93,81 @@ Page({
 
     //获取标记
     getMarkers() {
-        if (this.data.markers.length > 0) {
-            this.setData({
-                markers: [],
-                selected_lat: '',
-                selected_name: '',
-                selected_address: ''
-            })
-        } else {
-            let that = this
-            let userid = JSON.parse(wx.getStorageSync('userinfo')).USER_ID
-            map.getMarkers({
-                action: 'get_sign_index',
-                pageIndex: '1',
-                pageSize: '100',
-                is_all: '1',
-                user_id: userid
-            }).then(res => {
-                console.log(res)
-                let t = []
-                for (let i = 0; i < res.length; i++) {
-                    t.push({
-                        id: res[i].SIGN_ID,
-                        latitude: res[i].LATITUDE,
-                        longitude: res[i].LONGITUDE,
-                        width: 30,
-                        height: 30,
-                        SIGN_NAME: res[i].SIGN_NAME,
-                        SIGN_ID: res[i].SIGN_ID,
-                        STREET: res[i].STREET,
-                        REMARK: decodeURI(res[i].REMARK),
-                        iconPath: res[i].ISPUBLIC == '1' ? '/images/location-per.png' : '/images/location-pub.png'
-                    })
-                }
-                that.setData({
-                    markers: t
+        let that = this
+        let userid = JSON.parse(wx.getStorageSync('userinfo')).USER_ID
+        map.getMarkers({
+            action: 'get_sign_index',
+            pageIndex: '1',
+            pageSize: '100',
+            is_all: '0',
+            user_id: userid
+        }).then(res => {
+            console.log(res)
+            let t = []
+            for (let i = 0; i < res.length; i++) {
+                t.push({
+                    id: res[i].SIGN_ID,
+                    latitude: res[i].LATITUDE,
+                    longitude: res[i].LONGITUDE,
+                    width: 30,
+                    height: 30,
+                    callout: {
+                        content: `${res[i].SIGN_NAME}`,
+                         color: "#ffffff",
+                         fontSize: "16",
+                        borderRadius: "10",
+                         bgColor: "#0269B8",
+                         padding: "10",
+                         display: "ALWAYS"
+                    },
+                    SIGN_NAME: res[i].SIGN_NAME,
+                    SIGN_ID: res[i].SIGN_ID,
+                    STREET: res[i].STREET,
+                    REMARK: decodeURI(res[i].REMARK),
+                    iconPath: res[i].ISPUBLIC == '1' ? '/images/location-per.png' : '/images/location-pub.png'
                 })
+            }
+            that.setData({
+                markers: t
             })
-        }
+        })
     },
 
     //添加标记
     addPoint() {
         console.log(this.data)
-        if (this.data.selected_lat == '') {
-            wx.navigateTo({
-                url: '../addPoint/addPoint?lat=' + this.data.tmp_lat + '&long=' + this.data.tmp_long + '&markers=' + JSON.stringify(this.data.markers)
+        wx.showActionSheet({
+                itemList: ['公司部', '零售部'],
+                success: (res) => {
+                    console.log(res.tapIndex)
+                    if (res.tapIndex == 0) {
+                        wx.navigateTo({
+                            url: `/pages/addPoint/addPoint?lat=${this.data.tmp_lat}&long=${this.data.tmp_long}&SIGN_ID=${this.data.SIGN_ID}&ispublic=0`
+                        })
+                    } else {
+                        wx.navigateTo({
+                            url: `/pages/addPoint/addPoint?lat=${this.data.tmp_lat}&long=${this.data.tmp_long}&SIGN_ID=${this.data.SIGN_ID}&ispublic=1`
+                        })
+                    }
+                },
+                fail(res) {
+                    console.log(res.errMsg)
+                }
             })
-        } else {
-            wx.navigateTo({
-                url: '../add/add?lat=' + this.data.tmp_lat + '&long=' + this.data.tmp_long + '&SIGN_ID=' + this.data.SIGN_ID
-            })
-        }
+            // if (this.data.selected_lat == '') {
+            //     wx.navigateTo({
+            //         url: '../addPoint/addPoint?lat=' + this.data.tmp_lat + '&long=' + this.data.tmp_long + '&markers=' + JSON.stringify(this.data.markers)
+            //     })
+            // } else {
+            //     wx.navigateTo({
+            //         url: '../add/add?lat=' + this.data.tmp_lat + '&long=' + this.data.tmp_long + '&SIGN_ID=' + this.data.SIGN_ID
+            //     })
+            // }
 
 
     },
+
+
     // 定位
     getCurrentLocation() {
         wx.getLocation({
@@ -190,9 +209,6 @@ Page({
         }
     },
 
-    errToast() {
-        this.getMarkers()
-    },
     showAct() {
         if (this.data.selected_lat == '') {
             wx.showToast({
@@ -251,6 +267,53 @@ Page({
                 }
             }
         })
+    },
+
+    visitPoint(e) {
+        console.log(e)
+        wx.navigateTo({
+            url: `/pages/pointView/pointView?id=${e.markerId}`
+        })
     }
+
+    // setPoint(e) {
+    //     let { markers } = this.data
+    //     let mapCtx = wx.createMapContext("map");
+    //     mapCtx.getCenterLocation({
+    //         type: 'gcj02',
+    //         success: (res) => {
+    //             console.log(res)
+
+    //             var qqmapsdk = new QQMapWX({
+    //                 key: this.data.Config.mapKey // 必填
+    //             });
+    //             let _this = this
+    //             qqmapsdk.reverseGeocoder({
+    //                 //获取表单传入地址
+    //                 location: {
+    //                     latitude: res.latitude,
+    //                     longitude: res.longitude
+    //                 },
+    //                 success: function(res) { //成功后的回调
+    //                     _this.setData({
+    //                         place: res.result.formatted_addresses.recommend
+    //                     })
+    //                 },
+    //                 fail: function(error) {
+    //                     console.error(error);
+    //                 },
+    //                 complete: function(res) {
+    //                     console.log(res);
+    //                 }
+    //             })
+
+    //             that.setData({
+    //                 tmp_lat: res.latitude,
+    //                 tmp_long: res.longitude,
+
+    //             })
+    //         }
+    //     })
+    // }
 
 })
