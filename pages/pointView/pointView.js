@@ -12,7 +12,7 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function(options) {
+    onLoad: function (options) {
         console.log(options)
         this.getOne(options.id)
     },
@@ -20,14 +20,14 @@ Page({
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
-    onReady: function() {
+    onReady: function () {
 
     },
 
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function() {
+    onShow: function () {
 
     },
 
@@ -47,6 +47,8 @@ Page({
             })
         })
     },
+
+    // 删除标记
     deleteTap(e) {
         let userid = JSON.parse(wx.getStorageSync('userinfo')).USER_ID
         add.addAct({
@@ -68,6 +70,13 @@ Page({
                     }, 1500)
                 }
             })
+        })
+    },
+
+    // 编辑标记
+    editTap(e) {
+        wx.navigateTo({
+            url: `/pages/addPoint/addPoint?id=${e.currentTarget.id}`
         })
     }
 })
