@@ -18,6 +18,9 @@
                 <button style="background:#ff4949" id="{{data.SIGN_ID}}" catchtap="deleteTap">
                     删除标记
                 </button>
+                <button style="background:#309A9B" id="{{data.SIGN_ID}}" catchtap="activityTap">
+                    查看活动
+                </button>
             </view>
         </view>
     </view>

@@ -20,6 +20,7 @@ page {
     box-sizing: border-box;
     border-radius: 8rpx;
     border: 1px solid #ccc;
+    margin-bottom: 20rpx;
 }
 
 .form-textarea {

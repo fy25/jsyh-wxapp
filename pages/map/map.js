@@ -142,11 +142,11 @@ Page({
                     console.log(res.tapIndex)
                     if (res.tapIndex == 0) {
                         wx.navigateTo({
-                            url: `/pages/addPoint/addPoint?lat=${this.data.tmp_lat}&long=${this.data.tmp_long}&SIGN_ID=${this.data.SIGN_ID}&ispublic=0`
+                            url: `/pages/addPoint/addPoint?lat=${this.data.tmp_lat}&long=${this.data.tmp_long}&ispublic=0`
                         })
                     } else {
                         wx.navigateTo({
-                            url: `/pages/addPoint/addPoint?lat=${this.data.tmp_lat}&long=${this.data.tmp_long}&SIGN_ID=${this.data.SIGN_ID}&ispublic=1`
+                            url: `/pages/addPoint/addPoint?lat=${this.data.tmp_lat}&long=${this.data.tmp_long}&ispublic=1`
                         })
                     }
                 },

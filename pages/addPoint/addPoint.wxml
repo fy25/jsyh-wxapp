@@ -2,20 +2,19 @@
     <image src="/images/logo.png" />
 </view>
 <view class="form">
-    <view>
-        <picker bindchange="publicTap" value="{{publicIndex}}" range="{{publicTextList}}">
-            <view class="picker">
-                <view class="title">选择权限:   {{publicTextList[publicIndex]}}</view>
-                <view>
-                    <image src="/images/arrow-right.png" />
-                </view>
-            </view>
-        </picker>
-    </view>
     <view class="form-input">
         <input type="text" placeholder="在此添加标点名称" bindinput='nameInput' />
     </view>
-    <view>
+    <view class="form-input">
+        <input type="text" placeholder="请输入企事业单位名称" bindinput='nameInput' />
+    </view>
+    <view class="form-input" hidden="{{isPublic!=1}}">
+        <input type="text" placeholder="拓展人数" bindinput='nameInput' />
+    </view>
+    <view class="form-input" hidden="{{isPublic!=1}}">
+        <input type="text" placeholder="已拓展人数" bindinput='nameInput' />
+    </view>
+    <!-- <view hidden="{{isPublic==1}}">
         <picker bindchange="branchTap" value="{{index}}" range="{{branchTextList}}">
             <view class="picker">
                 <view class="title">选择区域:   {{branchTextList[index]}}</view>
@@ -34,10 +33,10 @@
                 </view>
             </view>
         </picker>
-    </view>
-    <view class="form-textarea">
+    </view> -->
+    <!-- <view class="form-textarea">
         <textarea placeholder="在此添加备注（选填）" bindinput='tipInput'></textarea>
-    </view>
-    <upload-img bind:myevent="chooseImg" bind:deleteTap="deleteTap"></upload-img>
+    </view> -->
+    <!-- <upload-img bind:myevent="chooseImg" bind:deleteTap="deleteTap"></upload-img> -->
     <button class="submit" catchtap="submitTap">提交标点</button>
 </view>
