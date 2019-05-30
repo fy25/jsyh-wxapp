@@ -14,7 +14,7 @@
     <view class="form-input" hidden="{{isPublic!=1}}">
         <input type="text" placeholder="已拓展人数" id="EndExpand" value="{{EndExpand}}" bindinput='inputTap' />
     </view>
-    <view hidden="{{isPublic==1}}">
+    <!-- <view hidden="{{isPublic==1}}">
         <picker bindchange="branchTap" value="{{index}}" range="{{branchTextList}}">
             <view class="picker">
                 <view class="title">选择区域:   {{branchTextList[index]}}</view>
@@ -23,7 +23,7 @@
                 </view>
             </view>
         </picker>
-    </view>
+    </view> -->
     <!-- <view>
         <picker bindchange="statehTap" value="{{stateIndex}}" range="{{stateTextlist}}">
             <view class="picker">
