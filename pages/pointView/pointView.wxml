@@ -9,7 +9,13 @@
         <view class='body'>
             <view class='title'>标记名称：{{data.SIGN_NAME}}</view>
             <view class='content'>
-                <text>标记备注：{{data.REMARK}}</text>
+                <text>企事业单位名称：{{data.CENAME}}</text>
+            </view>
+            <view class='content'>
+                <text>需要拓展人数：{{data.EXPAND}}</text>
+            </view>
+            <view class='content'>
+                <text>已经拓展人数：{{data.ENDEXPAND}}</text>
             </view>
             <view class="btn-group">
                 <button style="background:#0269B8" id="{{data.SIGN_ID}}" catchtap="editTap">

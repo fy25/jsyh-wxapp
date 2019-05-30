@@ -1,10 +1,13 @@
-<view class="search" catchtap="chooseLocation">
+<view class="search">
     <icon type="search" size="16" color="#999" />
-    <input type="text" value="{{place}}" placeholder="搜索地点" disabled bindconfirm="searchTap" />
+    <input type="text" value="{{place}}" placeholder="搜索地点" catchtap="chooseLocation" disabled bindconfirm="searchTap" />
+    <button class="filter" catchtap="goWhere" data-path="/pages/filter/filter">筛选</button>
 </view>
 <view class="map">
     <map id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="18" markers="{{markers}}" bindmarkertap="markertap" bindregionchange="regionchange" bindcallouttap="visitPoint">
-        <cover-view></cover-view>
+        <cover-view>
+            <cover-image src="/images/choose.png"></cover-image>
+        </cover-view>
     </map>
 </view>
 <view class="container">
@@ -27,7 +30,7 @@
         <text>{{selected_remark}}</text>
     </view>
     <view class="handle">
-        <view class="item left">
+        <!-- <view class="item left">
             <view catchtap="showAct">
                 <image src="/images/book.png" />
                 <text>查看活动</text>
@@ -36,10 +39,10 @@
                 <image src="/images/location.png" />
                 <text>{{markers.length>0?"关闭":"历史"}}标记</text>
             </view>
-        </view>
+        </view> -->
         <view class="item right">
-            <view catchtap="gateTap">导航</view>
-            <view bindtap="addPoint">添加{{selected_lat==''?"标记":"活动"}}</view>
+            <!-- <view catchtap="gateTap">导航</view> -->
+            <view bindtap="addPoint">添加标记</view>
         </view>
     </view>
 </view>

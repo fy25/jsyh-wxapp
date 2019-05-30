@@ -1,0 +1,27 @@
+.form {
+    background-color: var(--bg-gray);
+    padding: 48rpx;
+    box-sizing: border-box;
+    font-size: var(--fs28);
+    min-height: 100vh;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40rpx 100rpx;
+    box-sizing: border-box;
+}
+
+.btn button {
+    background-color: var(--main-color);
+    color: #fff;
+    font-size: 30rpx;
+    width: 100%;
+}
+
+.checkbox {
+    display: block;
+    padding: 10rpx;
+}

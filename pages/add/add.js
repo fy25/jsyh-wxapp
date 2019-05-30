@@ -1,4 +1,5 @@
 import { Add } from "../../service/add"
+import { Config } from "../../utils/config"
 const add = new Add()
 
 Page({
@@ -30,7 +31,9 @@ Page({
         stateTextlist: ["未开始", "开始", "结束", "超时"],
         stateIndex: null,
         Activity_Name: null,
-        State: null
+        State: '',
+        Config,
+        edit: false
     },
 
     /**
@@ -44,8 +47,20 @@ Page({
             long: options.long,
             SIGN_ID: options.SIGN_ID
         })
+        if (options.id) {
+            this.data.id = options.id
+            this.getOne(options.id)
+            this.setData({
+                edit: true
+            })
+        } else {
+            this.setData({
+                edit: false
+            })
+        }
 
     },
+
     titleInput(e) {
         this.setData({
             Activity_Name: e.detail.value
@@ -53,7 +68,7 @@ Page({
     },
     contentInput(e) {
         this.setData({
-            Remark: encodeURI(e.detail.value)
+            Remark: e.detail.value
         })
     },
     startTap(e) {
@@ -111,16 +126,41 @@ Page({
         })
     },
 
+    // 输入事件
+    inputTap(e) {
+        this.setData({
+            [e.currentTarget.id]: e.detail.value
+        })
+    },
+
+    // 获取单挑活动数据
+    getOne(id) {
+        let userid = JSON.parse(wx.getStorageSync('userinfo')).USER_ID
+        let data = {
+            action: 'get_activity_object',
+            _key: id,
+            user_id: userid
+        }
+        add.addAct(data).then(res => {
+            console.log(res)
+            let Activity_Name = res.ACTIVITY_NAME
+            let Begin_Date = res.BEGIN_DATE
+            let Remark = decodeURI(res.REMARK)
+            let Url = res.URL
+            this.setData({
+                Activity_Name,
+                Begin_Date,
+                Remark,
+                Url
+            })
+        })
+    },
+
     submitTap() {
-        let { Begin_Date, End_Date, Activity_Name, State, Remark } = this.data
+        let { Begin_Date, End_Date, Activity_Name, State, Remark, Url } = this.data
         if (Activity_Name == null) {
             wx.showToast({
                 title: '请填写活动名称',
-                icon: 'none'
-            })
-        } else if (State == null) {
-            wx.showToast({
-                title: '请选择活动状态',
                 icon: 'none'
             })
         } else if (Begin_Date == "") {
@@ -128,16 +168,16 @@ Page({
                 title: '请选择开始时间',
                 icon: 'none'
             })
-        } else if (End_Date == "") {
-            wx.showToast({
-                title: '请选择结束时间',
-                icon: 'none'
-            })
         } else {
             let userid = JSON.parse(wx.getStorageSync('userinfo')).USER_ID
 
+
+            wx.showLoading({
+                title: '提交中',
+                mask: true
+            })
             this.makeImg().then(img => {
-                add.addAct({
+                let params = {
                     action: 'add_activity_index',
                     _key: "",
                     Img: img,
@@ -147,14 +187,20 @@ Page({
                     End_Date: End_Date,
                     State: State,
                     Sign_ID: this.data.SIGN_ID,
-                    user_id: userid
-                }).then(res => {
+                    user_id: userid,
+                    Url
+                }
+                if (this.data.id) {
+                    params._key = this.data.id
+                }
+                add.addAct(params).then(res => {
                     wx.showToast({
                         title: '提交成功',
                         icon: 'success',
                         duration: 2000,
                         mask: true,
                         success: () => {
+                            wx.hideLoading()
                             setTimeout(() => {
                                 wx.navigateBack({
                                     delta: 1

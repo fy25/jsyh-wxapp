@@ -15,7 +15,7 @@ Page({
     data: {
         tempFilePaths: [],
         selectArray: [],
-        name: '',
+        Sign_Name: null,
         tmp_id: '',
 
         Config,
@@ -23,8 +23,8 @@ Page({
         index: null,
         stateIndex: null,
         publicIndex: null,
-        BUG_ID: null,
-        State: null,
+        BUG_ID: '',
+        State: '',
         IsPublic: null,
         statelist: [{
                 value: "0",
@@ -50,8 +50,13 @@ Page({
         ],
         publicTextList: ["公司部", "零售部"],
         stateTextlist: ["未开发", "正在开发", "已开发"],
-        Img: null,
-        tempImg: []
+        Img: '',
+        tempImg: [],
+
+        CEName: null,
+        Expand: '',
+        EndExpand: '',
+        edit: false
     },
 
     /**
@@ -59,17 +64,47 @@ Page({
      */
     onLoad: function(options) {
         console.log(options.ispublic)
+        let edit = null;
         if (options.id) {
+            console.log("修改")
             this.data.id = options.id
+            this.getOne(options.id)
+            edit = true
+        } else {
+            edit = false
         }
         this.setData({
             lat: options.lat,
-            long: options.long
+            long: options.long,
+            edit
         })
         this.getBugId()
         this.getLocationInfo()
         this.setData({
             isPublic: options.ispublic
+        })
+    },
+
+    // 获取数据
+    getOne(id) {
+        let userid = JSON.parse(wx.getStorageSync('userinfo')).USER_ID
+        let data = {
+            action: 'get_sign_object',
+            _key: id,
+            user_id: userid
+        }
+        addPoint.getBugId(data).then(res => {
+            console.log(res)
+            let Sign_Name = res.SIGN_NAME
+            let CEName = res.CENAME
+            let Expand = res.EXPAND
+            let EndExpand = res.ENDEXPAND
+            this.setData({
+                Sign_Name,
+                CEName,
+                Expand,
+                EndExpand
+            })
         })
     },
 
@@ -108,16 +143,24 @@ Page({
     //     console.log(e.detail.imgList, "222")
     //     this.data.Img = e.detail.imgList
     // },
-    nameInput: function(e) {
+    // nameInput: function(e) {
+    //     this.setData({
+    //         name: e.detail.value
+    //     })
+    // },
+    // tipInput: function(e) {
+    //     this.setData({
+    //         tip: encodeURI(e.detail.value)
+    //     })
+    // },
+
+    // 输入事件
+    inputTap(e) {
         this.setData({
-            name: e.detail.value
+            [e.currentTarget.id]: e.detail.value
         })
     },
-    tipInput: function(e) {
-        this.setData({
-            tip: encodeURI(e.detail.value)
-        })
-    },
+
     getBugId: function() {
         addPoint.getBugId({
             action: 'get_user_group_index'
@@ -227,54 +270,44 @@ Page({
 
 
     submitTap: function() {
-        let {
-            name,
-            State,
-            BUG_ID,
-            IsPublic
-        } = this.data
-        if (name == "") {
-            wx.showToast({
-                title: '请填写标注名称！',
-                icon: 'none'
-            })
-        } else if (State == null) {
-            wx.showToast({
-                title: '请选择状态',
-                icon: 'none'
-            })
-        } else if (BUG_ID == null) {
-            wx.showToast({
-                title: '请选择区域',
-                icon: 'none'
-            })
-        } else if (IsPublic == null) {
-            wx.showToast({
-                title: '请选择权限',
-                icon: 'none'
-            })
-        } else {
-            let userid = JSON.parse(wx.getStorageSync('userinfo')).USER_ID
-
-
-            this.makeImg().then(img => {
-                console.log(img)
-                addPoint.addMarker({
-                    action: 'add_sign_index',
-                    Sign_Name: this.data.name,
-                    Remark: this.data.tip,
-                    Longitude: this.data.long,
-                    Latitude: this.data.lat,
-                    Province: this.data.Province,
-                    City: this.data.City,
-                    District: this.data.District,
-                    Street: this.data.Street,
-                    State: this.data.State,
-                    BUG_ID: this.data.BUG_ID,
-                    Img: img,
-                    user_id: userid,
-                    IsPublic: IsPublic
-                }).then(res => {
+        console.log(this.data.isPublic)
+        let { Sign_Name, isPublic, CEName, EndExpand, Expand, edit } = this.data
+        let userid = JSON.parse(wx.getStorageSync('userinfo')).USER_ID
+        let params = {
+            action: 'add_sign_index',
+            Sign_Name: Sign_Name,
+            Remark: this.data.tip,
+            Longitude: this.data.long,
+            Latitude: this.data.lat,
+            Province: this.data.Province,
+            City: this.data.City,
+            District: this.data.District,
+            Street: this.data.Street,
+            State: this.data.State,
+            BUG_ID: this.data.BUG_ID,
+            Img: this.data.img,
+            user_id: userid,
+            IsPublic: isPublic,
+            CEName: CEName,
+            Expand: Expand,
+            EndExpand: EndExpand
+        }
+        if (edit) {
+            params._key = this.data.id
+        }
+        if (isPublic == 0) {
+            if (Sign_Name == null) {
+                wx.showToast({
+                    title: '请填写标注名称',
+                    icon: 'none'
+                })
+            } else if (CEName == null) {
+                wx.showToast({
+                    title: '请填写企事业单位名称',
+                    icon: 'none'
+                })
+            } else {
+                addPoint.addMarker(params).then(res => {
                     wx.showToast({
                         title: '提交成功',
                         icon: 'success',
@@ -289,9 +322,48 @@ Page({
                         }
                     })
                 })
-            })
-
-
+            }
+        } else {
+            if (Sign_Name == null) {
+                wx.showToast({
+                    title: '请填写标注名称',
+                    icon: 'none'
+                })
+            } else if (CEName == null) {
+                wx.showToast({
+                    title: '请填写企事业单位名称',
+                    icon: 'none'
+                })
+            } else if (Expand == '') {
+                wx.showToast({
+                    title: '请输入需扩展的人数',
+                    icon: 'none'
+                })
+            } else if (EndExpand == '') {
+                wx.showToast({
+                    title: '请输入需扩展的人数',
+                    icon: 'none'
+                })
+            } else {
+                params.Expand = Expand
+                params.EndExpand = EndExpand
+                addPoint.addMarker(params).then(res => {
+                    wx.showToast({
+                        title: '提交成功',
+                        icon: 'success',
+                        duration: 2000,
+                        mask: true,
+                        success: () => {
+                            setTimeout(() => {
+                                wx.navigateBack({
+                                    delta: 1
+                                })
+                            }, 2000)
+                        }
+                    })
+                })
+            }
         }
+
     }
 })

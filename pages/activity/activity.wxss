@@ -1,71 +1,97 @@
+.main {
+    margin-top: 20rpx;
+    padding-bottom: 120rpx;
+}
 
-.main{
-  margin-top: 20rpx;
+.item {
+    margin-top: 30rpx;
+    border-bottom: 1rpx solid #eee;
+    padding-bottom: 43rpx;
 }
-.item{
-  margin-top: 30rpx;
-  border-bottom: 1rpx solid #eee;
-  padding-bottom: 43rpx;
+
+.head {
+    padding: 0 30rpx;
 }
-.head{
-  padding: 0 30rpx;
+
+.head {
+    display: flex;
+    align-items: center;
+    font-size: 30rpx;
 }
-.head{
-  display: flex;
-  align-items: center;
-  font-size: 30rpx;
+
+.left {
+    flex: 1;
+    display: flex;
+    align-items: center;
 }
-.left{
-  flex: 1;
-  display: flex;
-  align-items: center;
+
+.left image {
+    width: 88rpx;
+    height: 88rpx;
+    border-radius: 50%;
 }
-.left image{
-  width: 88rpx;
-  height: 88rpx;
-  border-radius: 50%;
+
+.left view {
+    display: inline-block;
+    margin-left: 18rpx;
+    color: #005bac;
+    font-weight: bold;
 }
-.left view{
-  display: inline-block;
-  margin-left: 18rpx;
-  color: #005bac;
-  font-weight: bold;
+
+.right {
+    font-size: 24rpx;
+    text-align: right;
+    flex: 1;
+    color: #b2b2b2;
 }
-.right{
-  font-size: 24rpx;
-  text-align: right;
-  flex: 1;
-  color: #b2b2b2;
+
+.body {
+    padding: 0 50rpx 0 136rpx;
+    padding-top: 10rpx;
 }
-.body{
-  padding: 0 50rpx 0 136rpx;
-  padding-top: 10rpx;
+
+.title {
+    font-size: 34rpx;
+    font-weight: bold;
+    color: #000;
 }
-.title{
-  font-size: 34rpx;
-  font-weight: bold;
-  color: #000;
+
+.content {
+    margin-top: 20rpx;
+    font-size: 28rpx;
+    color: #666;
+    line-height: 55rpx;
 }
-.content{
-  margin-top: 20rpx;
-  font-size: 28rpx;
-  color: #666;
-  line-height: 55rpx;
+
+.content text {
+    display: -webkit-box;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
-.content text{
-  display: -webkit-box;
-  word-break: break-all;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp:3;
-  overflow: hidden;
-  text-overflow:ellipsis;
+
+.images {
+    display: flex;
+    margin-top: 35rpx;
 }
-.images{
-  display: flex;
-  margin-top: 35rpx;
+
+.body image {
+    width: 178rpx;
+    height: 178rpx;
+    margin: 0 10rpx;
 }
-.body image{
-  width: 178rpx;
-  height: 178rpx;
-  margin: 0 10rpx;
+
+.btn {
+    width: 100%;
+    height: 100rpx;
+    background-color: var(--main-color);
+    color: #fff;
+    font-size: 30rpx;
+    text-align: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    line-height: 100rpx;
 }

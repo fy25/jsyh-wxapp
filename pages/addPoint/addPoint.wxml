@@ -3,18 +3,18 @@
 </view>
 <view class="form">
     <view class="form-input">
-        <input type="text" placeholder="在此添加标点名称" bindinput='nameInput' />
+        <input type="text" placeholder="在此添加标点名称" id="Sign_Name" value="{{Sign_Name}}" bindinput='inputTap' />
     </view>
     <view class="form-input">
-        <input type="text" placeholder="请输入企事业单位名称" bindinput='nameInput' />
+        <input type="text" placeholder="请输入企事业单位名称" id="CEName" value="{{CEName}}" bindinput='inputTap' />
     </view>
     <view class="form-input" hidden="{{isPublic!=1}}">
-        <input type="text" placeholder="拓展人数" bindinput='nameInput' />
+        <input type="text" placeholder="拓展人数" id="Expand" value="{{Expand}}" bindinput='inputTap' />
     </view>
     <view class="form-input" hidden="{{isPublic!=1}}">
-        <input type="text" placeholder="已拓展人数" bindinput='nameInput' />
+        <input type="text" placeholder="已拓展人数" id="EndExpand" value="{{EndExpand}}" bindinput='inputTap' />
     </view>
-    <!-- <view hidden="{{isPublic==1}}">
+    <view hidden="{{isPublic==1}}">
         <picker bindchange="branchTap" value="{{index}}" range="{{branchTextList}}">
             <view class="picker">
                 <view class="title">选择区域:   {{branchTextList[index]}}</view>
@@ -24,7 +24,7 @@
             </view>
         </picker>
     </view>
-    <view>
+    <!-- <view>
         <picker bindchange="statehTap" value="{{stateIndex}}" range="{{stateTextlist}}">
             <view class="picker">
                 <view class="title">选择状态:   {{stateTextlist[stateIndex]}}</view>
@@ -38,5 +38,5 @@
         <textarea placeholder="在此添加备注（选填）" bindinput='tipInput'></textarea>
     </view> -->
     <!-- <upload-img bind:myevent="chooseImg" bind:deleteTap="deleteTap"></upload-img> -->
-    <button class="submit" catchtap="submitTap">提交标点</button>
+    <button class="submit" catchtap="submitTap">{{edit?'修改标记':'提交标记'}}</button>
 </view>

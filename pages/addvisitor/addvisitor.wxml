@@ -19,7 +19,7 @@
         </picker>
     </view>
     <view class="form-textarea">
-        <textarea placeholder="在此添加活动内容" bindinput='contentInput'></textarea>
+        <textarea placeholder="在此添加访客备注" bindinput='contentInput'></textarea>
     </view>
     <upload-img bind:myevent="chooseImg" bind:deleteTap="deleteTap"></upload-img>
     <button class="submit" catchtap="submitTap">提交访客</button>

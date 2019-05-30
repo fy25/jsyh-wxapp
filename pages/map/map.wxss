@@ -113,17 +113,22 @@
 }
 
 .map cover-view {
-    width: 30rpx;
-    height: 30rpx;
-    display: inline-block;
+    width: 100rpx;
+    height: 100rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     margin: auto;
-    background-color: red;
-    border-radius: 50%;
+}
+
+.map cover-view image {
+    width: 70rpx;
+    height: 70rpx;
 }
 
 .logout {
@@ -144,10 +149,22 @@
     padding: 0 20rpx;
     box-sizing: border-box;
     align-items: center;
+    position: relative;
 }
 
 .search input {
     font-size: 28rpx;
-    width: 100%;
+    width: 70%;
     margin-left: 20rpx;
+}
+
+.filter {
+    font-size: 26rpx;
+    color: #333;
+    position: absolute;
+    right: 50rpx;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--main-color);
+    color: #fff;
 }

@@ -1,0 +1,43 @@
+<view class="form">
+    <view class="item">
+        <picker bindchange="publicTap" value="{{index}}" range="{{publicTextList}}">
+            <view class="picker">
+                <view class="title">选择部门:  {{publicTextList[index]}}</view>
+                <view>
+                    <image src="/images/arrow-right.png" />
+                </view>
+            </view>
+        </picker>
+    </view>
+    <view class="item">
+        <picker mode="date" value="{{begin_date}}" bindchange="beginChange">
+            <view class="picker">
+                <view class="title">开始时间:  {{begin_date}}</view>
+                <view>
+                    <image src="/images/arrow-right.png" />
+                </view>
+            </view>
+        </picker>
+    </view>
+    <view class="item">
+        <picker mode="date" value="{{end_date}}" bindchange="endChange">
+            <view class="picker">
+                <view class="title">开始时间:  {{end_date}}</view>
+                <view>
+                    <image src="/images/arrow-right.png" />
+                </view>
+            </view>
+        </picker>
+    </view>
+    <view class="item">
+        <checkbox-group bindchange="checkboxChange">
+            <label class="checkbox" wx:for="{{branchlist}}">
+                <checkbox value="{{item.USERGROUP_ID}}" />
+                {{item.USERGROUP_NAME}}
+            </label>
+        </checkbox-group>
+    </view>
+    <view class="btn">
+        <button catchtap="goWhere" data-path="/pages/map/map">查询</button>
+    </view>
+</view>

@@ -15,10 +15,26 @@ Page({
         active_index: -1,
         markers: [],
         Config,
-        place: ''
+        place: '',
+
+        bug_id: '',
+        begin_date: '',
+        end_date: '',
+        ispublic: '',
+        name: ''
     },
-    onLoad() {
+    onLoad(options) {
         this.getCurrentLocation()
+        console.log(options, "0000000")
+        if (Object.keys(options).length != 0) {
+            console.log("进去了")
+            this.data.bug_id = options.bug_id
+            this.data.begin_date = options.begin_date
+            this.data.end_date = options.end_date
+            this.data.ispublic = options.isPublic
+                // this.data.name = options.name
+            this.getMarkers()
+        }
     },
     onShow() {
         this.getMarkers()
@@ -95,12 +111,19 @@ Page({
     getMarkers() {
         let that = this
         let userid = JSON.parse(wx.getStorageSync('userinfo')).USER_ID
+        let { bug_id, begin_date, end_date, ispublic, name } = this.data
+        console.log(this.data)
         map.getMarkers({
             action: 'get_sign_index',
             pageIndex: '1',
             pageSize: '100',
             is_all: '0',
-            user_id: userid
+            user_id: userid,
+            bug_id,
+            begin_date,
+            end_date,
+            ispublic,
+            name
         }).then(res => {
             console.log(res)
             let t = []
@@ -123,7 +146,7 @@ Page({
                     SIGN_NAME: res[i].SIGN_NAME,
                     SIGN_ID: res[i].SIGN_ID,
                     STREET: res[i].STREET,
-                    REMARK: decodeURI(res[i].REMARK),
+                    REMARK: decodeURI(res[i].CENAME),
                     iconPath: res[i].ISPUBLIC == '1' ? '/images/location-per.png' : '/images/location-pub.png'
                 })
             }
@@ -274,7 +297,11 @@ Page({
         wx.navigateTo({
             url: `/pages/pointView/pointView?id=${e.markerId}`
         })
-    }
+    },
+
+    goWhere(e) {
+        wx.navigateTo({ url: e.currentTarget.dataset.path })
+    },
 
     // setPoint(e) {
     //     let { markers } = this.data

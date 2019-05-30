@@ -6,9 +6,6 @@ page {
     background-color: var(--bg-gray);
     padding: 48rpx;
     box-sizing: border-box;
-}
-
-.form {
     font-size: var(--fs28);
 }
 

@@ -23,7 +23,12 @@ Page({
         this.setData({
             SIGN_ID: options.SIGN_ID
         })
+        this.data.lat = options.lat
+        this.data.long = options.long
+    },
+    onShow() {
         this.getAct()
+
     },
     getAct() {
         let that = this
@@ -87,6 +92,22 @@ Page({
         wx.previewImage({
             current: e.currentTarget.dataset.img, // 当前显示图片的http链接
             urls: [e.currentTarget.dataset.img]
+        })
+    },
+
+    // 添加活动
+    goWhere() {
+        let { lat, long } = this.data
+        wx.navigateTo({
+            url: `/pages/add/add?lat=${lat}&long=${long}&SIGN_ID=${this.data.SIGN_ID}`
+        })
+    },
+
+    // 编辑活动
+    editTap(e) {
+        let { lat, long } = this.data
+        wx.navigateTo({
+            url: `/pages/add/add?lat=${lat}&long=${long}&SIGN_ID=${this.data.SIGN_ID}&id=${e.currentTarget.id}`
         })
     }
 })

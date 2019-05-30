@@ -10,7 +10,8 @@
     "pages/add/add",
     "pages/visitor/visitor",
     "pages/addvisitor/addvisitor",
-    "pages/pointView/pointView"
+    "pages/pointView/pointView",
+    "pages/filter/filter"
   ],
   "window": {
     "backgroundTextStyle": "light",

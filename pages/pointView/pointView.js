@@ -77,14 +77,16 @@ Page({
     editTap(e) {
         let { data } = this.data
         wx.navigateTo({
-            url: `/pages/addPoint/addPoint?id=${e.currentTarget.id}&ispublic=${data.ISPUBLIC}&lat${data.LATITUDE}&long=${data.LONGITUDE}`
+            url: `/pages/addPoint/addPoint?id=${e.currentTarget.id}&ispublic=${data.ISPUBLIC}&lat=${data.LATITUDE}&long=${data.LONGITUDE}`
         })
     },
 
     // 查看活动
     activityTap(e) {
+        console.log(this.data.data)
+        let { LATITUDE, LONGITUDE } = this.data.data
         wx.navigateTo({
-            url: `/pages/activity/activity?SIGN_ID=${e.currentTarget.id}`
+            url: `/pages/activity/activity?SIGN_ID=${e.currentTarget.id}&lat=${LATITUDE}&long=${LONGITUDE}`
         })
     }
 })
