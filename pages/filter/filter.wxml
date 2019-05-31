@@ -1,8 +1,8 @@
 <view class="form">
     <view class="item">
-        <picker bindchange="publicTap" value="{{index}}" range="{{publicTextList}}">
+        <picker bindchange="publicTap" value="{{publicIndex}}" range="{{publicTextList}}">
             <view class="picker">
-                <view class="title">选择部门:  {{publicTextList[index]}}</view>
+                <view class="title">选择部门:  {{publicTextList[publicIndex]}}</view>
                 <view>
                     <image src="/images/arrow-right.png" />
                 </view>

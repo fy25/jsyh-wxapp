@@ -22,7 +22,7 @@ Page({
             },
         ],
         publicTextList: ["公司部", "零售部"],
-        index: 0,
+        publicIndex: "",
         isPublic: '',
         begin_date: '',
         end_date: '',
