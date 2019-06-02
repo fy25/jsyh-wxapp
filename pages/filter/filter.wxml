@@ -32,7 +32,7 @@
     <view class="item">
         <picker mode="date" value="{{end_date}}" bindchange="endChange">
             <view class="picker">
-                <view class="title">开始时间:  {{end_date}}</view>
+                <view class="title">结束时间:  {{end_date}}</view>
                 <view>
                     <image src="/images/arrow-right.png" />
                 </view>
