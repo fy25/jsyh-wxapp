@@ -74,11 +74,11 @@ Page({
             edit = false
         }
         this.setData({
-            lat: options.lat,
-            long: options.long,
-            edit
-        })
-        this.getBugId()
+                lat: options.lat,
+                long: options.long,
+                edit
+            })
+            // this.getBugId()
         this.getLocationInfo()
         this.setData({
             isPublic: options.ispublic
@@ -273,6 +273,7 @@ Page({
         console.log(this.data.isPublic)
         let { Sign_Name, isPublic, CEName, EndExpand, Expand, edit } = this.data
         let userid = JSON.parse(wx.getStorageSync('userinfo')).USER_ID
+        let bug_id = JSON.parse(wx.getStorageSync('userinfo')).USERGROUP_ID
         let params = {
             action: 'add_sign_index',
             Sign_Name: Sign_Name,
@@ -284,7 +285,7 @@ Page({
             District: this.data.District,
             Street: this.data.Street,
             State: this.data.State,
-            BUG_ID: this.data.BUG_ID,
+            BUG_ID: bug_id,
             Img: this.data.img,
             user_id: userid,
             IsPublic: isPublic,

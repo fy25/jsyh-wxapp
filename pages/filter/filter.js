@@ -14,19 +14,27 @@ Page({
         Config,
         publicList: [{
                 value: 0,
-                label: "公司部"
+                label: "公司业务部"
             },
             {
                 value: 1,
-                label: "零售部"
+                label: "零售业务部"
+            },
+            {
+                value: "",
+                label: "公司业务部和零售业务部"
             },
         ],
-        publicTextList: ["公司部", "零售部"],
+        publicTextList: ["公司业务部", "零售业务部", "公司业务部和零售业务部"],
         publicIndex: "",
         isPublic: '',
         begin_date: '',
         end_date: '',
-        bug_id: ''
+        bug_id: '',
+        name: '',
+        checkAll: false,
+        nameList: [],
+        nameIndex: 0
     },
 
     /**
@@ -34,6 +42,7 @@ Page({
      */
     onLoad: function(options) {
         this.getBugId()
+        this.getAllName()
     },
 
     checkboxChange: function(e) {
@@ -52,24 +61,28 @@ Page({
         })
     },
 
+    nameTap(e) {
+        let { nameList } = this.data;
+        console.log(nameList[e.detail.value])
+        this.setData({ nameIndex: e.detail.value })
+        this.data.name = nameList[e.detail.value]
+    },
+
     getBugId: function() {
+        let userid = JSON.parse(wx.getStorageSync('userinfo')).USER_ID
+        let bug_id = JSON.parse(wx.getStorageSync('userinfo')).USERGROUP_ID
         addPoint.getBugId({
-            action: 'get_user_group_index'
+            action: 'get_user_group_index',
+            user_id: userid,
+            bug_id: bug_id
         }).then(res => {
-            let {
-                branchTextList
-            } = this.data
             this.data.branchList = res
             if (res.length != 0) {
                 console.log(res)
-                    // res.forEach(item => {
-                    //     branchTextList.push(`${item.USERGROUP_CODE}${item.USERGROUP_NAME}`)
-                    // })
+                this.setData({
+                    branchlist: res
+                })
             }
-            this.setData({
-                // branchTextList: branchTextList
-                branchlist: res
-            })
         })
     },
 
@@ -90,9 +103,62 @@ Page({
     },
 
     goWhere(e) {
-        let { begin_date, end_date, isPublic, bug_id } = this.data
+        let { begin_date, end_date, isPublic, bug_id, name } = this.data
+        if (name == '不筛选标记名') {
+            name = ""
+        }
         wx.reLaunch({
-            url: `${e.currentTarget.dataset.path}?begin_date=${begin_date}&end_date=${end_date}&isPublic=${isPublic}&bug_id=${bug_id}`
+            url: `${e.currentTarget.dataset.path}?begin_date=${begin_date}&end_date=${end_date}&isPublic=${isPublic}&bug_id=${bug_id}&name=${name}`
+        })
+    },
+
+    chooseAll() {
+        console.log(this.data.branchlist)
+        let { branchlist, checkAll } = this.data
+        if (checkAll) {
+            branchlist.forEach(item => {
+                item.checked = false
+            });
+            this.data.bug_id = ""
+        } else {
+            let temp = []
+            branchlist.forEach(item => {
+                item.checked = true
+                temp.push(item.USERGROUP_ID)
+            });
+            console.log(temp)
+            this.data.bug_id = temp.join(",")
+        }
+        this.setData({
+            branchlist,
+            checkAll: !checkAll
+        })
+    },
+
+    // 获取所有标记名称
+    getAllName() {
+        let userid = JSON.parse(wx.getStorageSync('userinfo')).USER_ID
+        let bug_id = JSON.parse(wx.getStorageSync('userinfo')).USERGROUP_ID
+        addPoint.getBugId({
+            action: 'get_sign_index',
+            pageIndex: '1',
+            pageSize: '100',
+            is_all: '0',
+            user_id: userid,
+            bug_id: bug_id,
+            begin_date: "",
+            end_date: "",
+            ispublic: "",
+            name: ""
+        }).then(res => {
+            console.log(res)
+            let nameList = []
+            res.forEach(item => {
+                nameList.push(item.SIGN_NAME)
+            })
+            nameList.unshift('不筛选标记名')
+            this.setData({ nameList })
         })
     }
+
 })

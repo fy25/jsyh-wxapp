@@ -10,6 +10,16 @@
         </picker>
     </view>
     <view class="item">
+        <picker bindchange="nameTap" value="{{nameIndex}}" range="{{nameList}}">
+            <view class="picker">
+                <view class="title">选择标记名称:  {{nameList[nameIndex]}}</view>
+                <view>
+                    <image src="/images/arrow-right.png" />
+                </view>
+            </view>
+        </picker>
+    </view>
+    <view class="item">
         <picker mode="date" value="{{begin_date}}" bindchange="beginChange">
             <view class="picker">
                 <view class="title">开始时间:  {{begin_date}}</view>
@@ -30,9 +40,10 @@
         </picker>
     </view>
     <view class="item">
+        <button class="checkBtn" catchtap="chooseAll">{{checkAll?'取消全选':'全选'}}</button>
         <checkbox-group bindchange="checkboxChange">
             <label class="checkbox" wx:for="{{branchlist}}">
-                <checkbox value="{{item.USERGROUP_ID}}" />
+                <checkbox value="{{item.USERGROUP_ID}}" checked="{{item.checked}}" />
                 {{item.USERGROUP_NAME}}
             </label>
         </checkbox-group>

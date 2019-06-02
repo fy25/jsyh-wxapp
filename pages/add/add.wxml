@@ -42,5 +42,5 @@
     <view class="form-input">
         <input type="text" placeholder="在此添加链接" value="{{Url}}" id="Url" bindinput='inputTap' />
     </view>
-    <button class="submit" catchtap="submitTap">{{edit?'修改活动':'提交活动'}}</button>
+    <button class="submit" disabled="{{submitting}}" catchtap="submitTap">{{edit?'修改活动':'提交活动'}}</button>
 </view>

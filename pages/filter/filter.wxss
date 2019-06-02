@@ -6,6 +6,17 @@
     min-height: 100vh;
 }
 
+.form-input {
+    width: 100%;
+    height: 80rpx;
+    background-color: #fff;
+    padding: 10rpx 20rpx;
+    box-sizing: border-box;
+    border-radius: 8rpx;
+    border: 1px solid #ccc;
+    margin-bottom: 20rpx;
+}
+
 .btn {
     display: flex;
     justify-content: center;
@@ -24,4 +35,10 @@
 .checkbox {
     display: block;
     padding: 10rpx;
+}
+
+.checkBtn {
+    background-color: var(--second-color);
+    color: #fff;
+    font-size: 28rpx;
 }

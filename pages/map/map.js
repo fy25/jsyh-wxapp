@@ -21,7 +21,8 @@ Page({
         begin_date: '',
         end_date: '',
         ispublic: '',
-        name: ''
+        name: '',
+        showCallOut: true
     },
     onLoad(options) {
         this.getCurrentLocation()
@@ -32,7 +33,7 @@ Page({
             this.data.begin_date = options.begin_date
             this.data.end_date = options.end_date
             this.data.ispublic = options.isPublic
-                // this.data.name = options.name
+            this.data.name = options.name
             this.getMarkers()
         }
     },
@@ -100,7 +101,8 @@ Page({
                     selected_name: this.data.markers[i].SIGN_NAME,
                     SIGN_ID: this.data.markers[i].SIGN_ID,
                     selected_address: this.data.markers[i].STREET,
-                    selected_remark: this.data.markers[i].REMARK,
+                    selected_CENAME: this.data.markers[i].CENAME,
+                    BUG_NAME: this.data.markers[i].BUG_NAME,
                 })
                 break
             }
@@ -143,18 +145,51 @@ Page({
                          padding: "10",
                          display: "ALWAYS"
                     },
+                    BUG_NAME: res[i].BUG_NAME,
                     SIGN_NAME: res[i].SIGN_NAME,
                     SIGN_ID: res[i].SIGN_ID,
                     STREET: res[i].STREET,
-                    REMARK: decodeURI(res[i].CENAME),
+                    CENAME: decodeURI(res[i].CENAME),
+                    ISPUBLIC: res[i].ISPUBLIC,
                     iconPath: res[i].ISPUBLIC == '1' ? '/images/location-per.png' : '/images/location-pub.png'
                 })
             }
             that.setData({
-                markers: t
+                markers: t,
+                showCallOut: true
             })
         })
     },
+
+    // 关闭气泡
+    calloutTap() {
+        let { markers, showCallOut } = this.data
+        let t = []
+        console.log(markers)
+        for (let i = 0; i < markers.length; i++) {
+            t.push({
+                id: markers[i].SIGN_ID,
+                latitude: markers[i].latitude,
+                longitude: markers[i].longitude,
+                width: 30,
+                height: 30,
+                SIGN_NAME: markers[i].SIGN_NAME,
+                SIGN_ID: markers[i].SIGN_ID,
+                STREET: markers[i].STREET,
+                REMARK: decodeURI(markers[i].CENAME),
+                iconPath: markers[i].ISPUBLIC == '1' ? '/images/location-per.png' : '/images/location-pub.png'
+            })
+        }
+        this.setData({
+            markers: t,
+            showCallOut: false
+        })
+    },
+
+    // 打开气泡
+    // openCallout(){
+    //     this.getMarkers()
+    // },
 
     //添加标记
     addPoint() {

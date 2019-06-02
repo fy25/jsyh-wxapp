@@ -11,10 +11,10 @@
             <view class='content'>
                 <text>企事业单位名称：{{data.CENAME}}</text>
             </view>
-            <view class='content'>
+            <view class='content' hidden="{{data.ISPUBLIC=='0'}}">
                 <text>需要拓展人数：{{data.EXPAND}}</text>
             </view>
-            <view class='content'>
+            <view class='content' hidden="{{data.ISPUBLIC=='0'}}">
                 <text>已经拓展人数：{{data.ENDEXPAND}}</text>
             </view>
             <view class="btn-group">
@@ -26,6 +26,9 @@
                 </button>
                 <button style="background:#309A9B" id="{{data.SIGN_ID}}" catchtap="activityTap">
                     查看活动
+                </button>
+                <button style="background:#309A9B" id="{{data.SIGN_ID}}" catchtap="addActivity">
+                    添加活动
                 </button>
             </view>
         </view>

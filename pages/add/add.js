@@ -170,8 +170,9 @@ Page({
             })
         } else {
             let userid = JSON.parse(wx.getStorageSync('userinfo')).USER_ID
-
-
+            this.setData({
+                submitting: true
+            })
             wx.showLoading({
                 title: '提交中',
                 mask: true
@@ -208,7 +209,10 @@ Page({
                             }, 2000)
                         }
                     })
-
+                }).catch(err => {
+                    this.setData({
+                        submitting: false
+                    })
                 })
             })
 

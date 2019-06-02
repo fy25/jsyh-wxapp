@@ -43,15 +43,6 @@
     white-space: nowrap;
     overflow: hidden;
     margin: 10rpx 0;
-}
-
-.location text:first-child {
-    font-size: var(--fs30);
-    color: #333;
-    font-weight: 700;
-}
-
-.location text:last-child {
     font-size: var(--fs24);
     color: #999;
 }
@@ -95,12 +86,14 @@
 
 .handle .right view {
     font-size: var(--fs28);
-    background-color: var(--main-color);
+    /* background-color: var(--main-color); */
     border-radius: 60rpx;
     padding: 10rpx 22rpx;
+    color: #fff;
 }
 
-.handle .right view:first-child {
+
+/* .handle .right view:first-child {
     background-color: #fff;
     border: 1px solid var(--main-color);
     color: var(--main-color);
@@ -110,7 +103,7 @@
     background-color: var(--main-color);
     border: 1px solid #fff;
     color: #fff;
-}
+} */
 
 .map cover-view {
     width: 100rpx;
@@ -133,13 +126,22 @@
 
 .logout {
     position: fixed;
-    right: 0;
-    bottom: 0;
+    right: -100rpx;
+    bottom: -100rpx;
     color: #fff;
     background-color: #ff4949;
     font-size: 20rpx;
-    padding: 8rpx 14rpx;
-    border-radius: 6rpx;
+    border-radius: 100rpx;
+    width: 200rpx;
+    height: 200rpx;
+}
+
+.logout image {
+    position: absolute;
+    left: 30rpx;
+    top: 30rpx;
+    width: 60rpx;
+    height: 60rpx;
 }
 
 .search {
@@ -156,6 +158,9 @@
     font-size: 28rpx;
     width: 70%;
     margin-left: 20rpx;
+    border: 1px solid #eeeeee;
+    border-radius: 50rpx;
+    padding-left: 8rpx;
 }
 
 .filter {

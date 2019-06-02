@@ -88,5 +88,13 @@ Page({
         wx.navigateTo({
             url: `/pages/activity/activity?SIGN_ID=${e.currentTarget.id}&lat=${LATITUDE}&long=${LONGITUDE}`
         })
-    }
+    },
+
+    // 添加活动
+    addActivity(e) {
+        let { LATITUDE, LONGITUDE, SIGN_ID } = this.data.data
+        wx.navigateTo({
+            url: `/pages/add/add?lat=${LATITUDE}&long=${LONGITUDE}&SIGN_ID=${SIGN_ID}`
+        })
+    },
 })
