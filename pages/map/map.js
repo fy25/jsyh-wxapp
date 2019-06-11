@@ -22,7 +22,8 @@ Page({
         end_date: '',
         ispublic: '',
         name: '',
-        showCallOut: true
+        showCallOut: true,
+        is_all: '0'
     },
     onLoad(options) {
         this.getCurrentLocation()
@@ -34,11 +35,16 @@ Page({
             this.data.end_date = options.end_date
             this.data.ispublic = options.isPublic
             this.data.name = options.name
-            this.getMarkers()
+            this.data.is_all = options.is_all
+                // this.getMarkers()
         }
     },
     onShow() {
         this.getMarkers()
+        let USER_NAME = JSON.parse(wx.getStorageSync('userinfo')).USER_NAME
+        wx.setNavigationBarTitle({
+            title: `三公里营销(${USER_NAME})`
+        })
     },
     regionchange(e) {
         if (e.type == 'end' && (e.causedBy == 'scale' || e.causedBy == 'drag')) {
@@ -113,13 +119,13 @@ Page({
     getMarkers() {
         let that = this
         let userid = JSON.parse(wx.getStorageSync('userinfo')).USER_ID
-        let { bug_id, begin_date, end_date, ispublic, name } = this.data
+        let { bug_id, begin_date, end_date, ispublic, name, is_all } = this.data
         console.log(this.data)
         map.getMarkers({
             action: 'get_sign_index',
             pageIndex: '1',
             pageSize: '100',
-            is_all: '0',
+            is_all: is_all,
             user_id: userid,
             bug_id,
             begin_date,

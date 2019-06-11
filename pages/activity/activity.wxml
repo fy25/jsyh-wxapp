@@ -13,13 +13,13 @@
         <text>活动时间：{{item.BEGIN_DATE}}</text>
       </view>
       <view class='content'>
-        <text>活动备注：{{item.REMARK}}</text>
+        <text>活动备注：{{item.REMARK=='undefined'?'':item.REMARK}}</text>
       </view>
-      <view class='images'>
+      <view class='images' hidden="{{item.imgList.length==0}}">
         <image mode='aspectFill' wx:for="{{item.imgList}}" wx:key="*" src='{{item}}' data-img="{{item}}" catchtap="previewTap"></image>
       </view>
       <view class='content'>
-        <text>链接地址：{{item.URL}}</text>
+        <text>链接地址：{{item.URL=='undefined'?'':item.URL}}</text>
       </view>
       <view class="btn-group">
         <button style="background:#0269B8" id="{{item.ACTIVITY_ID}}" catchtap="editTap">

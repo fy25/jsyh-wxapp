@@ -108,7 +108,7 @@ Page({
             name = ""
         }
         wx.reLaunch({
-            url: `${e.currentTarget.dataset.path}?begin_date=${begin_date}&end_date=${end_date}&isPublic=${isPublic}&bug_id=${bug_id}&name=${name}`
+            url: `${e.currentTarget.dataset.path}?begin_date=${begin_date}&end_date=${end_date}&isPublic=${isPublic}&bug_id=${bug_id}&name=${name}&is_all=1`
         })
     },
 

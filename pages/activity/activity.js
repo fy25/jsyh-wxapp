@@ -31,7 +31,6 @@ Page({
 
     },
     getAct() {
-        let that = this
         let userid = JSON.parse(wx.getStorageSync('userinfo')).USER_ID
         act.getAct({
             action: 'get_activity_index',
@@ -43,6 +42,8 @@ Page({
         }).then(res => {
             res.forEach(item => {
                 item.REMARK = decodeURI(item.REMARK)
+                item.BEGIN_DATE = this.crtTimeFtt(item.BEGIN_DATE)
+                item.CREATEDATE = this.crtTimeFtt(item.CREATEDATE)
                 let imgList = []
                 if (item.IMG != "&nbsp;") {
                     if (item.IMG.indexOf(",") != -1) {
@@ -109,5 +110,19 @@ Page({
         wx.navigateTo({
             url: `/pages/add/add?lat=${lat}&long=${long}&SIGN_ID=${this.data.SIGN_ID}&id=${e.currentTarget.id}`
         })
-    }
+    },
+
+    // 时间格式化
+    crtTimeFtt(val, row) {
+        if (val != null) {
+            var date = new Date(val);
+            return (
+                date.getFullYear() +
+                "-" +
+                (date.getMonth() + 1) +
+                "-" +
+                date.getDate()
+            );
+        }
+    },
 })
