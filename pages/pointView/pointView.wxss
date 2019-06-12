@@ -45,7 +45,7 @@
 }
 
 .body {
-    padding: 0 50rpx 0 80rpx;
+    padding: 0 20rpx 0 60rpx;
     padding-top: 10rpx;
 }
 

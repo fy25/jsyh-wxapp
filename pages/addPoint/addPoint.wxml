@@ -14,29 +14,5 @@
     <view class="form-input" hidden="{{isPublic!=1}}">
         <input type="text" placeholder="该社区/企事业单位已拓展人数" id="EndExpand" value="{{EndExpand}}" bindinput='inputTap' />
     </view>
-    <!-- <view hidden="{{isPublic==1}}">
-        <picker bindchange="branchTap" value="{{index}}" range="{{branchTextList}}">
-            <view class="picker">
-                <view class="title">选择区域:   {{branchTextList[index]}}</view>
-                <view>
-                    <image src="/images/arrow-right.png" />
-                </view>
-            </view>
-        </picker>
-    </view> -->
-    <!-- <view>
-        <picker bindchange="statehTap" value="{{stateIndex}}" range="{{stateTextlist}}">
-            <view class="picker">
-                <view class="title">选择状态:   {{stateTextlist[stateIndex]}}</view>
-                <view>
-                    <image src="/images/arrow-right.png" />
-                </view>
-            </view>
-        </picker>
-    </view> -->
-    <!-- <view class="form-textarea">
-        <textarea placeholder="在此添加备注（选填）" bindinput='tipInput'></textarea>
-    </view> -->
-    <!-- <upload-img bind:myevent="chooseImg" bind:deleteTap="deleteTap"></upload-img> -->
     <button class="submit" catchtap="submitTap">{{edit?'修改标记':'提交标记'}}</button>
 </view>

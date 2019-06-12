@@ -23,7 +23,7 @@ Page({
         ispublic: '',
         name: '',
         showCallOut: true,
-        is_all: '0'
+        is_all: '1'
     },
     onLoad(options) {
         this.getCurrentLocation()
@@ -201,7 +201,7 @@ Page({
     addPoint() {
         console.log(this.data)
         wx.showActionSheet({
-                itemList: ['公司部', '零售部'],
+                itemList: ['公司业务部', '零售业务部'],
                 success: (res) => {
                     console.log(res.tapIndex)
                     if (res.tapIndex == 0) {

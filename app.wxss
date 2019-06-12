@@ -81,7 +81,7 @@ page {
 .btn-group button {
     font-size: 26rpx;
     color: #fff;
-    margin: 0 5rpx;
-    padding-left: 10rpx;
-    padding-right: 10rpx;
+    margin: 0 15rpx;
+    padding-left: 15rpx;
+    padding-right: 15rpx;
 }

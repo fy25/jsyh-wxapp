@@ -192,27 +192,6 @@ Page({
         })
     },
 
-    // statehTap(e) {
-    //     let {
-    //         statelist
-    //     } = this.data
-    //     console.log(e.detail.value)
-    //     this.setData({
-    //         stateIndex: e.detail.value,
-    //         State: statelist[e.detail.value].value
-    //     })
-    // },
-
-    // publicTap(e) {
-    //     let {
-    //         publicList
-    //     } = this.data
-    //     console.log(e.detail.value)
-    //     this.setData({
-    //         publicIndex: e.detail.value,
-    //         IsPublic: publicList[e.detail.value].value
-    //     })
-    // },
 
     getDate: function(e) {
         let tmp_id = this.data.selectArray[e.detail.id].id
@@ -220,52 +199,6 @@ Page({
             tmp_id: tmp_id
         })
     },
-    // makeImg() {
-    //     return new Promise((resolve, reject) => {
-    //         let {
-    //             Img
-    //         } = this.data
-    //         if (Img != null && Img.length > 0) {
-
-    //             let tempImg = []
-
-    //             Img.forEach(item => {
-    //                 wx.getFileSystemManager().readFile({
-    //                     filePath: item, //选择图片返回的相对路径
-    //                     encoding: 'base64', //编码格式
-    //                     success: res => { //成功的回调
-
-    //                         tempImg.push(`data:image/png;base64,${res.data}`)
-    //                         if (tempImg.length == Img.length) {
-    //                             resolve(tempImg.join("|"))
-    //                         }
-    //                     },
-    //                     fail: (err) => {
-    //                         console.log(err, "cuo")
-    //                     }
-    //                 })
-    //             })
-    //         } else {
-    //             resolve([])
-    //         }
-
-    //     })
-    // },
-
-    // 上传图片
-    // upLoadImg() {
-    //     this.makeImg().then(res => {
-    //         console.log(res)
-    //         for (let i = 0; i < res.length; i++) {
-    //             addPoint.addMarker({
-    //                 action: 'upload_pictures_img',
-    //                 Img: res[i],
-    //                 user_id: JSON.parse(wx.getStorageSync('userinfo')).USER_ID,
-    //                 name: 'Sign'
-    //             })
-    //         }
-    //     })
-    // },
 
 
 
@@ -316,8 +249,11 @@ Page({
                         mask: true,
                         success: () => {
                             setTimeout(() => {
-                                wx.navigateBack({
-                                    delta: 1
+                                // wx.navigateBack({
+                                //     delta: 1
+                                // })
+                                wx.reLaunch({
+                                    url: '/pages/map/map'
                                 })
                             }, 2000)
                         }
@@ -356,8 +292,8 @@ Page({
                         mask: true,
                         success: () => {
                             setTimeout(() => {
-                                wx.navigateBack({
-                                    delta: 1
+                                wx.reLaunch({
+                                    url: '/pages/map/map'
                                 })
                             }, 2000)
                         }
