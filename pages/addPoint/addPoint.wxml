@@ -2,15 +2,19 @@
     <image src="/images/logo.png" />
 </view>
 <view class="form">
+    <view class="tit">标点名称:</view>
     <view class="form-input">
         <input type="text" placeholder="在此添加标点名称" id="Sign_Name" value="{{Sign_Name}}" bindinput='inputTap' />
     </view>
+    <view class="tit">社区/企事业单位名称:</view>
     <view class="form-input">
         <input type="text" placeholder="请输入社区/企事业单位名称" id="CEName" value="{{CEName}}" bindinput='inputTap' />
     </view>
+    <view class="tit" hidden="{{isPublic!=1}}">社区/企事业单位总人数:</view>
     <view class="form-input" hidden="{{isPublic!=1}}">
         <input type="text" placeholder="该社区/企事业单位总人数" id="Expand" value="{{Expand}}" bindinput='inputTap' />
     </view>
+    <view class="tit" hidden="{{isPublic!=1}}">社区/企事业单位已拓展人数:</view>
     <view class="form-input" hidden="{{isPublic!=1}}">
         <input type="text" placeholder="该社区/企事业单位已拓展人数" id="EndExpand" value="{{EndExpand}}" bindinput='inputTap' />
     </view>

@@ -72,21 +72,31 @@ Page({
     deleteTap(e) {
         console.log(e.target.id)
         let userid = JSON.parse(wx.getStorageSync('userinfo')).USER_ID
-        act.getAct({
-            action: 'del_activity_index',
-            pkVal: e.target.id,
-            user_id: userid
-        }).then(res => {
-            console.log(res)
-            wx.showToast({
-                title: '删除成功',
-                icon: 'success',
-                duration: 1500,
-                mask: true,
-                success: () => {
-                    this.getAct()
+        wx.showModal({
+            title: '提示',
+            content: '确定删除？',
+            success: (res) => {
+                if (res.confirm) {
+                    act.getAct({
+                        action: 'del_activity_index',
+                        pkVal: e.target.id,
+                        user_id: userid
+                    }).then(res => {
+                        console.log(res)
+                        wx.showToast({
+                            title: '删除成功',
+                            icon: 'success',
+                            duration: 1500,
+                            mask: true,
+                            success: () => {
+                                this.getAct()
+                            }
+                        })
+                    })
+                } else if (res.cancel) {
+                    console.log('用户点击取消')
                 }
-            })
+            }
         })
     },
     previewTap(e) {

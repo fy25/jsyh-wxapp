@@ -51,25 +51,35 @@ Page({
     // 删除标记
     deleteTap(e) {
         let userid = JSON.parse(wx.getStorageSync('userinfo')).USER_ID
-        add.addAct({
-            action: 'del_sign_index',
-            pkVal: e.currentTarget.id,
-            user_id: userid
-        }).then(res => {
-            console.log(res)
-            wx.showToast({
-                title: '删除成功',
-                icon: 'success',
-                duration: 1500,
-                mask: true,
-                success: () => {
-                    setTimeout(() => {
-                        wx.navigateBack({
-                            delta: 1
+        wx.showModal({
+            title: '提示',
+            content: '确定删除？',
+            success: (res) => {
+                if (res.confirm) {
+                    add.addAct({
+                        action: 'del_sign_index',
+                        pkVal: e.currentTarget.id,
+                        user_id: userid
+                    }).then(res => {
+                        console.log(res)
+                        wx.showToast({
+                            title: '删除成功',
+                            icon: 'success',
+                            duration: 1500,
+                            mask: true,
+                            success: () => {
+                                setTimeout(() => {
+                                    wx.navigateBack({
+                                        delta: 1
+                                    })
+                                }, 1500)
+                            }
                         })
-                    }, 1500)
+                    })
+                } else if (res.cancel) {
+                    console.log('用户点击取消')
                 }
-            })
+            }
         })
     },
 

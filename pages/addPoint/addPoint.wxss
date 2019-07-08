@@ -18,6 +18,13 @@ page {
     border-radius: 8rpx;
     border: 1px solid #ccc;
     margin-bottom: 20rpx;
+    display: flex;
+    flex-direction: column;
+}
+
+.tit {
+    font-size: 28rpx;
+    margin-bottom: 10rpx;
 }
 
 .form-textarea {

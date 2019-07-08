@@ -135,25 +135,6 @@ Page({
         })
     },
 
-    // chooseImg(e) {
-    //     console.log(e.detail.imgList, "111")
-    //     this.data.Img = e.detail.imgList
-    // },
-    // deleteTap(e) {
-    //     console.log(e.detail.imgList, "222")
-    //     this.data.Img = e.detail.imgList
-    // },
-    // nameInput: function(e) {
-    //     this.setData({
-    //         name: e.detail.value
-    //     })
-    // },
-    // tipInput: function(e) {
-    //     this.setData({
-    //         tip: encodeURI(e.detail.value)
-    //     })
-    // },
-
     // 输入事件
     inputTap(e) {
         this.setData({
@@ -249,9 +230,6 @@ Page({
                         mask: true,
                         success: () => {
                             setTimeout(() => {
-                                // wx.navigateBack({
-                                //     delta: 1
-                                // })
                                 wx.reLaunch({
                                     url: '/pages/map/map'
                                 })
@@ -273,12 +251,12 @@ Page({
                 })
             } else if (Expand == '') {
                 wx.showToast({
-                    title: '请输入需扩展的人数',
+                    title: '该社区/企事业单位总人数',
                     icon: 'none'
                 })
             } else if (EndExpand == '') {
                 wx.showToast({
-                    title: '请输入需扩展的人数',
+                    title: '该社区/企事业单位已拓展人数',
                     icon: 'none'
                 })
             } else {

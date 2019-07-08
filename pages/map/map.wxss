@@ -151,7 +151,11 @@
     padding: 0 20rpx;
     box-sizing: border-box;
     align-items: center;
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 11;
+    background-color: #fff;
 }
 
 .search input {

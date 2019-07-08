@@ -2,9 +2,11 @@
     <image src="/images/logo.png" />
 </view>
 <view class="form">
+    <view class="tit">标题名称:</view>
     <view class="form-input">
         <input type="text" placeholder="在此添加标题" value="{{Activity_Name}}" bindinput='titleInput' />
     </view>
+    <view class="tit">活动时间:</view>
     <view>
         <picker bindchange="startTap" mode="date" value="{{Begin_Date}}">
             <view class="picker">
@@ -35,10 +37,12 @@
             </view>
         </picker>
     </view> -->
+    <view class="tit">活动内容:</view>
     <view class="form-textarea">
         <textarea placeholder="在此添加活动内容" value="{{Remark}}" bindinput='contentInput'></textarea>
     </view>
     <upload-img imgList="{{imgList}}" bind:myevent="chooseImg" bind:deleteTap="deleteTap"></upload-img>
+    <view class="tit">链接:</view>
     <view class="form-input">
         <input type="text" placeholder="在此添加链接" value="{{Url}}" id="Url" bindinput='inputTap' />
     </view>

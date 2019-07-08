@@ -22,6 +22,11 @@ page {
     margin-bottom: 40rpx;
 }
 
+.tit {
+    font-size: 28rpx;
+    margin-bottom: 10rpx;
+}
+
 .form-textarea {
     width: 100%;
     background-color: #fff;
