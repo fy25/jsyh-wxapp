@@ -9,7 +9,7 @@
             </view>
         </picker>
     </view>
-    <view class="item">
+    <!-- <view class="item">
         <picker bindchange="nameTap" value="{{nameIndex}}" range="{{nameList}}">
             <view class="picker">
                 <view class="title">选择标记名称:  {{nameList[nameIndex]}}</view>
@@ -18,7 +18,7 @@
                 </view>
             </view>
         </picker>
-    </view>
+    </view> -->
     <view class="item">
         <picker mode="date" value="{{begin_date}}" bindchange="beginChange">
             <view class="picker">
@@ -38,6 +38,12 @@
                 </view>
             </view>
         </picker>
+    </view>
+    <view class="item">
+        <view class="picker" style="justify-content:flex-start">
+            <view class="title">关键字:</view>
+            <input placeholder="输入关键字" style="margin-left:10rpx;" bindinput="nameInput"/>
+        </view>
     </view>
     <view class="item">
         <button class="checkBtn" catchtap="chooseAll">{{checkAll?'取消全选':'全选'}}</button>

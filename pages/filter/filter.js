@@ -68,6 +68,11 @@ Page({
         this.data.name = nameList[e.detail.value]
     },
 
+    nameInput(e) {
+        console.log(e)
+        this.data.name = e.detail.value
+    },
+
     getBugId: function() {
         let userid = JSON.parse(wx.getStorageSync('userinfo')).USER_ID
         let bug_id = JSON.parse(wx.getStorageSync('userinfo')).USERGROUP_ID

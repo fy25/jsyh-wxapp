@@ -17,20 +17,6 @@ Page({
         this.getOne(options.id)
     },
 
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function() {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function() {
-
-    },
-
     // 获取数据
     getOne(id) {
         let userid = JSON.parse(wx.getStorageSync('userinfo')).USER_ID
