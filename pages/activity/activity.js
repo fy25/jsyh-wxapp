@@ -69,6 +69,24 @@ Page({
             url: `/pages/visitor/visitor?id=${e.target.id}`
         })
     },
+
+    copyTap(e) {
+        let { url } = e.currentTarget.dataset
+        wx.setClipboardData({
+            data: url,
+            success: (res) => {
+                wx.getClipboardData({
+                    success: (res) => {
+                        console.log(res)
+                        wx.showToast({
+                            title: '复制成功'
+                        })
+                    }
+                })
+            }
+        })
+    },
+
     deleteTap(e) {
         console.log(e.target.id)
         let userid = JSON.parse(wx.getStorageSync('userinfo')).USER_ID

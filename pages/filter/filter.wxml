@@ -57,4 +57,7 @@
     <view class="btn">
         <button catchtap="goWhere" data-path="/pages/map/map">查询</button>
     </view>
+    <view class="btn">
+        <button catchtap="clearFilter" data-path="/pages/map/map">清除筛选</button>
+    </view>
 </view>

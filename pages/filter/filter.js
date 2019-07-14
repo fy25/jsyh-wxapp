@@ -117,6 +117,13 @@ Page({
         })
     },
 
+    // 清除筛选
+    clearFilter(e) {
+        wx.reLaunch({
+            url: `${e.currentTarget.dataset.path}`
+        })
+    },
+
     chooseAll() {
         console.log(this.data.branchlist)
         let { branchlist, checkAll } = this.data

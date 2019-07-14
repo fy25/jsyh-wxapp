@@ -142,7 +142,23 @@ Page({
             user_id: userid
         }
         add.addAct(data).then(res => {
+            let imgList = []
+            let tempImg = []
             console.log(res)
+            if (res.IMG != "&nbsp;") {
+                console.log(res.IMG.indexOf(','))
+                if (res.IMG.indexOf(',') != -1) {
+                    console.log("多张图片")
+                    tempImg = res.IMG
+                    tempImg = tempImg.split(",")
+                    console.log(tempImg)
+                    tempImg.forEach(item => {
+                        imgList.push(Config.serverUrl + item)
+                    })
+                } else {
+                    console.log("单张图片")
+                }
+            }
             let Activity_Name = res.ACTIVITY_NAME
             let Begin_Date = res.BEGIN_DATE
             let Remark = decodeURI(res.REMARK)
@@ -151,7 +167,8 @@ Page({
                 Activity_Name,
                 Begin_Date,
                 Remark,
-                Url
+                Url,
+                imgList
             })
         })
     },

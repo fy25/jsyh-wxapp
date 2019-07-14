@@ -61,6 +61,8 @@
     font-size: 28rpx;
     color: #666;
     line-height: 55rpx;
+    display: flex;
+    align-items: center;
 }
 
 .content text {
@@ -70,6 +72,12 @@
     -webkit-line-clamp: 3;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.copy {
+    background-color: #D5AB45;
+    color: #fff;
+    font-size: 24rpx;
 }
 
 .images {
