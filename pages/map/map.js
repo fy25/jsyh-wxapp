@@ -91,31 +91,55 @@ Page({
     },
     markertap(e) {
         let id = e.markerId
-        if (this.data.active_index != -1 && id != this.data.active_id) {
-            var t = 'markers[' + this.data.active_index + '].iconPath'
-            this.setData({
-                [t]: '/images/location.png'
-            })
-        }
-        console.log(this.data.markers)
-        for (let i = 0; i < this.data.markers.length; i++) {
-            if (id == this.data.markers[i].id) {
-                var markers = 'markers[' + i + '].iconPath';
+        debugger
+        let { markers, tempStore } = this.data
+        console.log(tempStore)
+        console.log(markers)
+        tempStore.forEach((item, i) => {
+            if (item.id == id) {
+                console.log(i, "[[")
+                tempStore[i].iconPath = `/images/location.png`
                 this.setData({
-                    [markers]: '/images/location.png',
-                    active_index: i,
-                    active_id: id,
-                    selected_lat: this.data.markers[i].latitude,
-                    selected_long: this.data.markers[i].longitude,
-                    selected_name: this.data.markers[i].SIGN_NAME,
-                    SIGN_ID: this.data.markers[i].SIGN_ID,
-                    selected_address: this.data.markers[i].STREET,
-                    selected_CENAME: this.data.markers[i].CENAME,
-                    BUG_NAME: this.data.markers[i].BUG_NAME,
+                    markers: tempStore,
+                    // active_index: i,
+                    // active_id: id,
+                    // selected_lat: this.data.markers[i].latitude,
+                    // selected_long: this.data.markers[i].longitude,
+                    // selected_name: this.data.markers[i].SIGN_NAME,
+                    // SIGN_ID: this.data.markers[i].SIGN_ID,
+                    // selected_address: this.data.markers[i].STREET,
+                    // selected_CENAME: this.data.markers[i].CENAME,
+                    // BUG_NAME: this.data.markers[i].BUG_NAME,
                 })
-                break
             }
-        }
+        })
+
+        // if (this.data.active_index != -1 && id != this.data.active_id) {
+        //     var t = 'markers[' + this.data.active_index + '].iconPath'
+        //     this.setData({
+        //         [t]: '/images/location.png'
+        //     })
+        // }
+        // console.log(this.data.markers)
+        // for (let i = 0; i < this.data.markers.length; i++) {
+        //     if (id == this.data.markers[i].id) {
+        //         var markers = 'markers[' + i + '].iconPath';
+        //         this.setData({
+        //             [markers]: '/images/location.png',
+        //             active_index: i,
+        //             active_id: id,
+        //             selected_lat: this.data.markers[i].latitude,
+        //             selected_long: this.data.markers[i].longitude,
+        //             selected_name: this.data.markers[i].SIGN_NAME,
+        //             SIGN_ID: this.data.markers[i].SIGN_ID,
+        //             selected_address: this.data.markers[i].STREET,
+        //             selected_CENAME: this.data.markers[i].CENAME,
+        //             BUG_NAME: this.data.markers[i].BUG_NAME,
+        //         })
+        //         break
+        //     }
+        // }
+
     },
 
 
@@ -164,6 +188,10 @@ Page({
                     iconPath: res[i].ISPUBLIC == '1' ? '/images/location-per.png' : '/images/location-pub.png'
                 })
             }
+            let tempStore = JSON.parse(JSON.stringify(t))
+            this.data.tempStore = tempStore
+
+
             that.setData({
                 markers: t,
                 showCallOut: true
@@ -203,10 +231,7 @@ Page({
 
     //添加标记
     addPoint() {
-        // let { retailKey, adminKey } = this.data.Config
-        // let userid = JSON.parse(wx.getStorageSync('userinfo')).USER_ID
         let ISPUBLIC = JSON.parse(wx.getStorageSync('userinfo')).ISPUBLIC
-            // debugger
         if (ISPUBLIC == "") {
             wx.showActionSheet({
                 itemList: ['公司业务部', '零售业务部'],
