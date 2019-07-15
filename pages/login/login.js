@@ -1,5 +1,6 @@
 import { Login } from "../../service/login"
 import util from "../../utils/util"
+import { Config } from "../../utils/config"
 const loginApi = new Login()
 
 Page({
@@ -9,18 +10,18 @@ Page({
      */
     data: {
         name: null,
-        pwd: null
+        pwd: null,
+        Config
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) { },
+    onLoad: function(options) {},
 
     // 登录
     signIn() {
-        let { name, pwd } = this.data
-        console.log(name, pwd)
+        let { name, pwd, Config } = this.data
         if (name == null) {
             util.toust('请输入工号')
         } else if (pwd == null) {
@@ -28,7 +29,6 @@ Page({
         } else {
             wx.showLoading({ title: '正在登录' })
             this.getCode(name).then(res => {
-                console.log(res, "32312")
                 let data = {
                     action: 'get_user_info',
                     name: name,
@@ -36,6 +36,20 @@ Page({
                     code: res
                 }
                 loginApi.signIn(data).then(res => {
+                    let ISPUBLIC = null
+                    let { retailKey, adminKey } = Config
+                    let userid = res.USER_ID
+                    if (adminKey.indexOf(userid) != -1) {
+                        ISPUBLIC = ''
+                    } else {
+                        if (retailKey.indexOf(userid) != -1) {
+                            console.log('零售部')
+                            ISPUBLIC = '1'
+                        } else {
+                            ISPUBLIC = '0'
+                        }
+                    }
+                    res.ISPUBLIC = ISPUBLIC
                     let userinfo = JSON.stringify(res)
                     wx.setStorageSync('userinfo', userinfo)
                     console.log(userinfo, "99999999999")

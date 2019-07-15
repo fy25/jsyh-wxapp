@@ -41,6 +41,35 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
+        let ISPUBLIC = JSON.parse(wx.getStorageSync('userinfo')).ISPUBLIC
+        this.data.ISPUBLIC = ISPUBLIC
+        let publicList = []
+        if (ISPUBLIC == "") {
+            publicList = [{
+                    value: 0,
+                    label: "公司业务部"
+                },
+                {
+                    value: 1,
+                    label: "零售业务部"
+                },
+                {
+                    value: "",
+                    label: "公司业务部和零售业务部"
+                },
+            ]
+        } else if (ISPUBLIC == "0") {
+            publicList = [{
+                value: 0,
+                label: "公司业务部"
+            }]
+        } else {
+            publicList = [{
+                value: 0,
+                label: "公司业务部"
+            }]
+        }
+        this.setData({ publicList })
         this.getBugId()
         this.getAllName()
     },

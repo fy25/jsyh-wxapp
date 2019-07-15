@@ -16,7 +16,6 @@ Page({
         markers: [],
         Config,
         place: '',
-
         bug_id: '',
         begin_date: '',
         end_date: '',
@@ -27,9 +26,13 @@ Page({
     },
     onLoad(options) {
         this.getCurrentLocation()
+        this.data.ispublic = JSON.parse(wx.getStorageSync('userinfo')).ISPUBLIC
+        console.log(JSON.parse(wx.getStorageSync('userinfo')).ISPUBLIC, "[[")
         console.log(options, "0000000")
+
         if (Object.keys(options).length != 0) {
             console.log("进去了")
+
             this.data.bug_id = options.bug_id
             this.data.begin_date = options.begin_date
             this.data.end_date = options.end_date
@@ -115,6 +118,7 @@ Page({
         }
     },
 
+
     //获取标记
     getMarkers() {
         let that = this
@@ -199,8 +203,12 @@ Page({
 
     //添加标记
     addPoint() {
-        console.log(this.data)
-        wx.showActionSheet({
+        // let { retailKey, adminKey } = this.data.Config
+        // let userid = JSON.parse(wx.getStorageSync('userinfo')).USER_ID
+        let ISPUBLIC = JSON.parse(wx.getStorageSync('userinfo')).ISPUBLIC
+            // debugger
+        if (ISPUBLIC == "") {
+            wx.showActionSheet({
                 itemList: ['公司业务部', '零售业务部'],
                 success: (res) => {
                     console.log(res.tapIndex)
@@ -218,15 +226,34 @@ Page({
                     console.log(res.errMsg)
                 }
             })
-            // if (this.data.selected_lat == '') {
-            //     wx.navigateTo({
-            //         url: '../addPoint/addPoint?lat=' + this.data.tmp_lat + '&long=' + this.data.tmp_long + '&markers=' + JSON.stringify(this.data.markers)
-            //     })
-            // } else {
-            //     wx.navigateTo({
-            //         url: '../add/add?lat=' + this.data.tmp_lat + '&long=' + this.data.tmp_long + '&SIGN_ID=' + this.data.SIGN_ID
-            //     })
-            // }
+        } else {
+            if (ISPUBLIC != '1') {
+                console.log('零售部')
+                wx.showActionSheet({
+                    itemList: ['零售业务部'],
+                    success: (res) => {
+                        console.log(res.tapIndex)
+                        if (res.tapIndex == 0) {
+                            wx.navigateTo({
+                                url: `/pages/addPoint/addPoint?lat=${this.data.tmp_lat}&long=${this.data.tmp_long}&ispublic=1`
+                            })
+                        }
+                    }
+                })
+            } else {
+                wx.showActionSheet({
+                    itemList: ['公司业务部'],
+                    success: (res) => {
+                        console.log(res.tapIndex)
+                        if (res.tapIndex == 0) {
+                            wx.navigateTo({
+                                url: `/pages/addPoint/addPoint?lat=${this.data.tmp_lat}&long=${this.data.tmp_long}&ispublic=0`
+                            })
+                        }
+                    }
+                })
+            }
+        }
 
 
     },
@@ -342,6 +369,24 @@ Page({
 
     goWhere(e) {
         wx.navigateTo({ url: e.currentTarget.dataset.path })
+    },
+
+    // 判断你是啥身份
+    judgeIdentity() {
+        let isPublic = null
+        let { retailKey, adminKey } = this.data.Config
+        let userid = JSON.parse(wx.getStorageSync('userinfo')).USER_ID
+        if (adminKey.indexOf(userid) != -1) {
+            isPublic = ''
+        } else {
+            if (retailKey.indexOf(userid) != -1) {
+                console.log('零售部')
+                isPublic = '1'
+            } else {
+                isPublic = '0'
+            }
+        }
+        return isPublic
     },
 
     // setPoint(e) {

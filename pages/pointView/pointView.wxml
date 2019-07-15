@@ -17,6 +17,21 @@
             <view class='content' hidden="{{data.ISPUBLIC=='0'}}">
                 <text>已经拓展人数：{{data.ENDEXPAND}}</text>
             </view>
+            <view class='content' hidden="{{data.ISPUBLIC=='0'}}">
+                <text>总活动数量：{{data.ACT_COUNT}}</text>
+            </view>
+            <view class='content' hidden="{{data.ISPUBLIC=='0'}}">
+                <text>上周活动数量：{{data.ACT_COUNT_SZ}}</text>
+            </view>
+            <view class='content' hidden="{{data.ISPUBLIC=='0'}}">
+                <text>本周活动数量：{{data.ACT_COUNT_BZ}}</text>
+            </view>
+            <view class='content' hidden="{{data.ISPUBLIC=='0'}}">
+                <text>上月活动数量：{{data.ACT_COUNT_SY}}</text>
+            </view>
+            <view class='content' hidden="{{data.ISPUBLIC=='0'}}">
+                <text>本月活动数量：{{data.ACT_COUNT_BY}}</text>
+            </view>
             <view class="btn-group">
                 <button style="background:#0269B8" id="{{data.SIGN_ID}}" catchtap="editTap">
                     修改标记
