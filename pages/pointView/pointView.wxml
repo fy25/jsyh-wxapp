@@ -11,6 +11,9 @@
             <view class='content'>
                 <text>企事业单位名称：{{data.CENAME}}</text>
             </view>
+            <view class='content'>
+                <text>支行名称：{{data.BUG_NAME}}</text>
+            </view>
             <view class='content' hidden="{{data.ISPUBLIC=='0'}}">
                 <text>需要拓展人数：{{data.EXPAND}}</text>
             </view>

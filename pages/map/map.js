@@ -28,7 +28,11 @@ Page({
         this.getCurrentLocation()
         this.data.ispublic = JSON.parse(wx.getStorageSync('userinfo')).ISPUBLIC
         console.log(JSON.parse(wx.getStorageSync('userinfo')).ISPUBLIC, "[[")
-        console.log(options, "0000000")
+        if (JSON.parse(wx.getStorageSync('userinfo')).ISPUBLIC == "") {
+            this.data.is_all = '1'
+        } else {
+            this.data.is_all = '0'
+        }
 
         if (Object.keys(options).length != 0) {
             console.log("进去了")
@@ -38,8 +42,8 @@ Page({
             this.data.end_date = options.end_date
             this.data.ispublic = options.isPublic
             this.data.name = options.name
-            this.data.is_all = options.is_all
-                // this.getMarkers()
+            // this.data.is_all = options.is_all
+            // this.getMarkers()
         }
     },
     onShow() {
@@ -67,15 +71,15 @@ Page({
                             latitude: res.latitude,
                             longitude: res.longitude
                         },
-                        success: function(res) { //成功后的回调
+                        success: function (res) { //成功后的回调
                             _this.setData({
                                 place: res.result.formatted_addresses.recommend
                             })
                         },
-                        fail: function(error) {
+                        fail: function (error) {
                             console.error(error);
                         },
-                        complete: function(res) {
+                        complete: function (res) {
                             console.log(res);
                         }
                     })
@@ -90,56 +94,67 @@ Page({
         }
     },
     markertap(e) {
-        let id = e.markerId
-        debugger
-        let { markers, tempStore } = this.data
-        console.log(tempStore)
-        console.log(markers)
-        tempStore.forEach((item, i) => {
-            if (item.id == id) {
-                console.log(i, "[[")
-                tempStore[i].iconPath = `/images/location.png`
-                this.setData({
-                    markers: tempStore,
-                    // active_index: i,
-                    // active_id: id,
-                    // selected_lat: this.data.markers[i].latitude,
-                    // selected_long: this.data.markers[i].longitude,
-                    // selected_name: this.data.markers[i].SIGN_NAME,
-                    // SIGN_ID: this.data.markers[i].SIGN_ID,
-                    // selected_address: this.data.markers[i].STREET,
-                    // selected_CENAME: this.data.markers[i].CENAME,
-                    // BUG_NAME: this.data.markers[i].BUG_NAME,
+        let userid = JSON.parse(wx.getStorageSync('userinfo')).USER_ID
+        let { bug_id, begin_date, end_date, ispublic, name, is_all } = this.data
+        map.getMarkers({
+            action: 'get_sign_index',
+            pageIndex: '1',
+            pageSize: '100',
+            is_all: is_all,
+            user_id: userid,
+            bug_id,
+            begin_date,
+            end_date,
+            ispublic,
+            name
+        }).then(res => {
+            let t = []
+            for (let i = 0; i < res.length; i++) {
+                t.push({
+                    id: res[i].SIGN_ID,
+                    latitude: res[i].LATITUDE,
+                    longitude: res[i].LONGITUDE,
+                    width: 30,
+                    height: 30,
+                    callout: {
+                        content: `${res[i].SIGN_NAME}`,
+                        color: "#ffffff",
+                        fontSize: "16",
+                        borderRadius: "10",
+                        bgColor: "#0269B8",
+                        padding: "10",
+                        display: "ALWAYS"
+                    },
+                    BUG_NAME: res[i].BUG_NAME,
+                    SIGN_NAME: res[i].SIGN_NAME,
+                    SIGN_ID: res[i].SIGN_ID,
+                    STREET: res[i].STREET,
+                    CENAME: decodeURI(res[i].CENAME),
+                    ISPUBLIC: res[i].ISPUBLIC,
+                    iconPath: res[i].ISPUBLIC == '1' ? '/images/location-per.png' : '/images/location-pub.png'
                 })
             }
+            let markers = t
+            let id = e.markerId
+            markers.forEach((item, i) => {
+                if (item.id == id) {
+                    console.log(i, "[[")
+                    markers[i].iconPath = `/images/location.png`
+                    this.setData({
+                        markers: markers,
+                        active_index: i,
+                        active_id: id,
+                        selected_lat: this.data.markers[i].latitude,
+                        selected_long: this.data.markers[i].longitude,
+                        selected_name: this.data.markers[i].SIGN_NAME,
+                        SIGN_ID: this.data.markers[i].SIGN_ID,
+                        selected_address: this.data.markers[i].STREET,
+                        selected_CENAME: this.data.markers[i].CENAME,
+                        BUG_NAME: this.data.markers[i].BUG_NAME,
+                    })
+                }
+            })
         })
-
-        // if (this.data.active_index != -1 && id != this.data.active_id) {
-        //     var t = 'markers[' + this.data.active_index + '].iconPath'
-        //     this.setData({
-        //         [t]: '/images/location.png'
-        //     })
-        // }
-        // console.log(this.data.markers)
-        // for (let i = 0; i < this.data.markers.length; i++) {
-        //     if (id == this.data.markers[i].id) {
-        //         var markers = 'markers[' + i + '].iconPath';
-        //         this.setData({
-        //             [markers]: '/images/location.png',
-        //             active_index: i,
-        //             active_id: id,
-        //             selected_lat: this.data.markers[i].latitude,
-        //             selected_long: this.data.markers[i].longitude,
-        //             selected_name: this.data.markers[i].SIGN_NAME,
-        //             SIGN_ID: this.data.markers[i].SIGN_ID,
-        //             selected_address: this.data.markers[i].STREET,
-        //             selected_CENAME: this.data.markers[i].CENAME,
-        //             BUG_NAME: this.data.markers[i].BUG_NAME,
-        //         })
-        //         break
-        //     }
-        // }
-
     },
 
 
@@ -172,12 +187,12 @@ Page({
                     height: 30,
                     callout: {
                         content: `${res[i].SIGN_NAME}`,
-                         color: "#ffffff",
-                         fontSize: "16",
+                        color: "#ffffff",
+                        fontSize: "16",
                         borderRadius: "10",
-                         bgColor: "#0269B8",
-                         padding: "10",
-                         display: "ALWAYS"
+                        bgColor: "#0269B8",
+                        padding: "10",
+                        display: "ALWAYS"
                     },
                     BUG_NAME: res[i].BUG_NAME,
                     SIGN_NAME: res[i].SIGN_NAME,
@@ -252,7 +267,7 @@ Page({
                 }
             })
         } else {
-            if (ISPUBLIC != '1') {
+            if (ISPUBLIC == '1') {
                 console.log('零售部')
                 wx.showActionSheet({
                     itemList: ['零售业务部'],

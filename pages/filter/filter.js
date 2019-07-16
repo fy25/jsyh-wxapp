@@ -65,8 +65,8 @@ Page({
             }]
         } else {
             publicList = [{
-                value: 0,
-                label: "公司业务部"
+                value: 1,
+                label: "零售业务部"
             }]
         }
         this.setData({ publicList })
