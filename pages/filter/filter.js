@@ -4,6 +4,7 @@ import {
 import {
     Config
 } from "../../utils/config"
+import utils from "../../utils/util"
 const addPoint = new AddPoint()
 Page({
 
@@ -13,17 +14,17 @@ Page({
     data: {
         Config,
         publicList: [{
-                value: 0,
-                label: "公司业务部"
-            },
-            {
-                value: 1,
-                label: "零售业务部"
-            },
-            {
-                value: "",
-                label: "公司业务部和零售业务部"
-            },
+            value: 0,
+            label: "公司业务部"
+        },
+        {
+            value: 1,
+            label: "零售业务部"
+        },
+        {
+            value: "",
+            label: "公司业务部和零售业务部"
+        },
         ],
         publicTextList: ["公司业务部", "零售业务部", "公司业务部和零售业务部"],
         publicIndex: "",
@@ -40,23 +41,25 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function(options) {
+    onLoad: function (options) {
+        let now = new Date()
+        let end = utils.formatDate(now)
         let ISPUBLIC = JSON.parse(wx.getStorageSync('userinfo')).ISPUBLIC
         this.data.ISPUBLIC = ISPUBLIC
         let publicList = []
         if (ISPUBLIC == "") {
             publicList = [{
-                    value: 0,
-                    label: "公司业务部"
-                },
-                {
-                    value: 1,
-                    label: "零售业务部"
-                },
-                {
-                    value: "",
-                    label: "公司业务部和零售业务部"
-                },
+                value: 0,
+                label: "公司业务部"
+            },
+            {
+                value: 1,
+                label: "零售业务部"
+            },
+            {
+                value: "",
+                label: "公司业务部和零售业务部"
+            },
             ]
         } else if (ISPUBLIC == "0") {
             publicList = [{
@@ -69,12 +72,15 @@ Page({
                 label: "零售业务部"
             }]
         }
-        this.setData({ publicList })
+        this.setData({
+            publicList,
+            end
+        })
         this.getBugId()
         this.getAllName()
     },
 
-    checkboxChange: function(e) {
+    checkboxChange: function (e) {
         console.log('checkbox发生change事件，携带value值为：', e.detail.value.join(','))
         this.data.bug_id = e.detail.value.join(',')
     },
@@ -102,7 +108,7 @@ Page({
         this.data.name = e.detail.value
     },
 
-    getBugId: function() {
+    getBugId: function () {
         let userid = JSON.parse(wx.getStorageSync('userinfo')).USER_ID
         let bug_id = JSON.parse(wx.getStorageSync('userinfo')).USERGROUP_ID
         addPoint.getBugId({

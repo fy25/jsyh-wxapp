@@ -1,6 +1,7 @@
 import { Add } from "../../service/add"
 import { Config } from "../../utils/config"
 const add = new Add()
+import utils from "../../utils/util"
 
 Page({
 
@@ -12,21 +13,21 @@ Page({
         Begin_Date: "",
         End_Date: "",
         statelist: [{
-                value: "0",
-                label: "未开始"
-            },
-            {
-                value: "1",
-                label: "开始"
-            },
-            {
-                value: "2",
-                label: "结束"
-            },
-            {
-                value: "3",
-                label: "超时"
-            }
+            value: "0",
+            label: "未开始"
+        },
+        {
+            value: "1",
+            label: "开始"
+        },
+        {
+            value: "2",
+            label: "结束"
+        },
+        {
+            value: "3",
+            label: "超时"
+        }
         ],
         stateTextlist: ["未开始", "开始", "结束", "超时"],
         stateIndex: null,
@@ -39,13 +40,17 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function(options) {
+    onLoad: function (options) {
         console.log(options)
+
+        let now = new Date()
+        let end = utils.formatDate(now)
         this.data.options = options
         this.setData({
             lat: options.lat,
             long: options.long,
-            SIGN_ID: options.SIGN_ID
+            SIGN_ID: options.SIGN_ID,
+            end
         })
         if (options.id) {
             this.data.id = options.id

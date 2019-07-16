@@ -27,26 +27,26 @@ Page({
         State: '',
         IsPublic: null,
         statelist: [{
-                value: "0",
-                label: "未开发"
-            },
-            {
-                value: "1",
-                label: "正在开发"
-            },
-            {
-                value: "2",
-                label: "已开发"
-            }
+            value: "0",
+            label: "未开发"
+        },
+        {
+            value: "1",
+            label: "正在开发"
+        },
+        {
+            value: "2",
+            label: "已开发"
+        }
         ],
         publicList: [{
-                value: 0,
-                label: "公司部"
-            },
-            {
-                value: 1,
-                label: "零售部"
-            },
+            value: 0,
+            label: "公司部"
+        },
+        {
+            value: 1,
+            label: "零售部"
+        },
         ],
         publicTextList: ["公司部", "零售部"],
         stateTextlist: ["未开发", "正在开发", "已开发"],
@@ -62,8 +62,7 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function(options) {
-        console.log(options.ispublic)
+    onLoad: function (options) {
         let edit = null;
         if (options.id) {
             console.log("修改")
@@ -74,11 +73,11 @@ Page({
             edit = false
         }
         this.setData({
-                lat: options.lat,
-                long: options.long,
-                edit
-            })
-            // this.getBugId()
+            lat: options.lat,
+            long: options.long,
+            edit
+        })
+        // this.getBugId()
         this.getLocationInfo()
         this.setData({
             isPublic: options.ispublic
@@ -126,10 +125,10 @@ Page({
                 this.data.District = res.result.address_component.district
                 this.data.Street = res.result.address_component.street
             },
-            fail: function(error) {
+            fail: function (error) {
                 console.error(error);
             },
-            complete: function(res) {
+            complete: function (res) {
                 console.log(res);
             }
         })
@@ -142,7 +141,7 @@ Page({
         })
     },
 
-    getBugId: function() {
+    getBugId: function () {
         addPoint.getBugId({
             action: 'get_user_group_index'
         }).then(res => {
@@ -174,7 +173,7 @@ Page({
     },
 
 
-    getDate: function(e) {
+    getDate: function (e) {
         let tmp_id = this.data.selectArray[e.detail.id].id
         this.setData({
             tmp_id: tmp_id
@@ -183,7 +182,7 @@ Page({
 
 
 
-    submitTap: function() {
+    submitTap: function () {
         console.log(this.data.isPublic)
         let { Sign_Name, isPublic, CEName, EndExpand, Expand, edit } = this.data
         let userid = JSON.parse(wx.getStorageSync('userinfo')).USER_ID

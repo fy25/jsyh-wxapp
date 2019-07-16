@@ -8,7 +8,7 @@
     </view>
     <view class="tit">活动时间:</view>
     <view>
-        <picker bindchange="startTap" mode="date" value="{{Begin_Date}}">
+        <picker bindchange="startTap" mode="date" end="{{end}}" value="{{Begin_Date}}">
             <view class="picker">
                 <view class="title">活动时间: {{Begin_Date}}</view>
                 <view>

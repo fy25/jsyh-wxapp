@@ -2,7 +2,7 @@
     <view class="item">
         <picker bindchange="publicTap" value="{{publicIndex}}" range="{{publicTextList}}">
             <view class="picker">
-                <view class="title">选择部门:  {{publicTextList[publicIndex]}}</view>
+                <view class="title">选择部门: {{publicTextList[publicIndex]}}</view>
                 <view>
                     <image src="/images/arrow-right.png" />
                 </view>
@@ -20,9 +20,9 @@
         </picker>
     </view> -->
     <view class="item">
-        <picker mode="date" value="{{begin_date}}" bindchange="beginChange">
+        <picker mode="date" value="{{begin_date}}" end="{{end}}" bindchange="beginChange">
             <view class="picker">
-                <view class="title">开始时间:  {{begin_date}}</view>
+                <view class="title">开始时间: {{begin_date}}</view>
                 <view>
                     <image src="/images/arrow-right.png" />
                 </view>
@@ -30,9 +30,9 @@
         </picker>
     </view>
     <view class="item">
-        <picker mode="date" value="{{end_date}}" bindchange="endChange">
+        <picker mode="date" value="{{end_date}}" end="{{end}}" bindchange="endChange">
             <view class="picker">
-                <view class="title">结束时间:  {{end_date}}</view>
+                <view class="title">结束时间: {{end_date}}</view>
                 <view>
                     <image src="/images/arrow-right.png" />
                 </view>
@@ -42,7 +42,7 @@
     <view class="item">
         <view class="picker" style="justify-content:flex-start">
             <view class="title">关键字:</view>
-            <input placeholder="输入关键字" style="margin-left:10rpx;" bindinput="nameInput"/>
+            <input placeholder="输入关键字" style="margin-left:10rpx;" bindinput="nameInput" />
         </view>
     </view>
     <view class="item">
