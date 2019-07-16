@@ -17,7 +17,7 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) { },
+    onLoad: function(options) {},
 
     // 登录
     signIn() {
@@ -36,13 +36,22 @@ Page({
                     code: res
                 }
                 loginApi.signIn(data).then(res => {
-                    let ISPUBLIC = null
-                    let { retailKey, adminKey } = Config
+                    let ISPUBLIC = null;
+                    let IS_ALL = null;
+                    let { retailKey, adminKey, retailId, corporateId } = Config
                     let userid = res.USER_ID
                     let { USERGROUP_ID } = res
                     if (adminKey.indexOf(userid) != -1) {
                         ISPUBLIC = ''
+                        IS_ALL = '1'
+                    } else if (retailId.indexOf(userid) != -1) {
+                        ISPUBLIC = '1'
+                        IS_ALL = '1'
+                    } else if (corporateId.indexOf(userid) != -1) {
+                        ISPUBLIC = '0'
+                        IS_ALL = '1'
                     } else {
+                        IS_ALL = '0'
                         if (retailKey.indexOf(USERGROUP_ID) != -1) {
                             console.log('零售部')
                             ISPUBLIC = '1'
@@ -51,6 +60,7 @@ Page({
                         }
                     }
                     res.ISPUBLIC = ISPUBLIC
+                    res.IS_ALL = IS_ALL
                     let userinfo = JSON.stringify(res)
                     wx.setStorageSync('userinfo', userinfo)
                     console.log(userinfo, "99999999999")

@@ -27,12 +27,8 @@ Page({
     onLoad(options) {
         this.getCurrentLocation()
         this.data.ispublic = JSON.parse(wx.getStorageSync('userinfo')).ISPUBLIC
-        console.log(JSON.parse(wx.getStorageSync('userinfo')).ISPUBLIC, "[[")
-        if (JSON.parse(wx.getStorageSync('userinfo')).ISPUBLIC == "") {
-            this.data.is_all = '1'
-        } else {
-            this.data.is_all = '0'
-        }
+        this.data.is_all = JSON.parse(wx.getStorageSync('userinfo')).IS_ALL
+        console.log(JSON.parse(wx.getStorageSync('userinfo')), "[[")
 
         if (Object.keys(options).length != 0) {
             this.data.bug_id = options.bug_id
@@ -40,8 +36,6 @@ Page({
             this.data.end_date = options.end_date
             this.data.ispublic = options.isPublic
             this.data.name = options.name
-            // this.data.is_all = options.is_all
-            // this.getMarkers()
         }
     },
     onShow() {
@@ -69,15 +63,15 @@ Page({
                             latitude: res.latitude,
                             longitude: res.longitude
                         },
-                        success: function (res) { //成功后的回调
+                        success: function(res) { //成功后的回调
                             _this.setData({
                                 place: res.result.formatted_addresses.recommend
                             })
                         },
-                        fail: function (error) {
+                        fail: function(error) {
                             console.error(error);
                         },
-                        complete: function (res) {
+                        complete: function(res) {
                             console.log(res);
                         }
                     })

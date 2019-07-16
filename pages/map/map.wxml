@@ -27,9 +27,9 @@
             </view>
         </view>
         <text style="font-size:30rpx;color:#333;font-weight:700;">
-            {{selected_name!=''?selected_name:'点击标记获取信息'}}
+            标记名称：{{selected_name!=''?selected_name:'点击标记获取信息'}}
         </text>
-        <text>{{selected_CENAME}}</text>
+        <text>社区/企事业单位名称：{{selected_CENAME}}</text>
         <text hidden="{{selected_name==''}}">客户所属支行：{{BUG_NAME}}</text>
     </view>
     <view class="handle">
