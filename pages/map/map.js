@@ -35,8 +35,6 @@ Page({
         }
 
         if (Object.keys(options).length != 0) {
-            console.log("进去了")
-
             this.data.bug_id = options.bug_id
             this.data.begin_date = options.begin_date
             this.data.end_date = options.end_date

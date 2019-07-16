@@ -1,6 +1,6 @@
 <view class="login">
     <view class="logo">
-        <!-- <image src="/images/logo.png" /> -->
+        <image src="/images/logo.png" />
     </view>
     <view class="form">
         <view class="form-item">

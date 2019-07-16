@@ -17,7 +17,7 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function(options) {},
+    onLoad: function (options) { },
 
     // 登录
     signIn() {
@@ -39,10 +39,11 @@ Page({
                     let ISPUBLIC = null
                     let { retailKey, adminKey } = Config
                     let userid = res.USER_ID
+                    let { USERGROUP_ID } = res
                     if (adminKey.indexOf(userid) != -1) {
                         ISPUBLIC = ''
                     } else {
-                        if (retailKey.indexOf(userid) != -1) {
+                        if (retailKey.indexOf(USERGROUP_ID) != -1) {
                             console.log('零售部')
                             ISPUBLIC = '1'
                         } else {
