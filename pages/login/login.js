@@ -38,9 +38,9 @@ Page({
                 loginApi.signIn(data).then(res => {
                     let ISPUBLIC = null;
                     let IS_ALL = null;
-                    let { retailKey, adminKey, retailId, corporateId } = Config
+                    let { retailKey, adminKey, retailId, corporateId, retailOrganization, corporationOrganization } = Config
                     let userid = res.USER_ID
-                    let { USERGROUP_ID } = res
+                    let { ORGANIZATION_ID } = res
                     if (adminKey.indexOf(userid) != -1) {
                         ISPUBLIC = ''
                         IS_ALL = '1'
@@ -52,10 +52,10 @@ Page({
                         IS_ALL = '1'
                     } else {
                         IS_ALL = '0'
-                        if (retailKey.indexOf(USERGROUP_ID) != -1) {
+                        if (retailOrganization.indexOf(ORGANIZATION_ID) != -1) {
                             console.log('零售部')
                             ISPUBLIC = '1'
-                        } else {
+                        } else if (corporationOrganization.indexOf(ORGANIZATION_ID) != -1) {
                             ISPUBLIC = '0'
                         }
                     }

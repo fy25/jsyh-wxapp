@@ -15,6 +15,12 @@ const Config = {
     ],
     corporateId: [ //公司部管理员
         '75e1f7a2-74ab-4d21-af74-a601f30f02ee'
+    ],
+    retailOrganization: [ //零售部门ID
+        '7fd46efd-5b1b-48da-95d1-1992e347f532'
+    ],
+    corporationOrganization: [ //公司部门ID
+        '550b796b-a6ca-4b18-a0a0-d5812dbd32d8'
     ]
 }
 
