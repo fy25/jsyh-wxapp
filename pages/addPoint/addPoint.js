@@ -258,7 +258,7 @@ Page({
                     title: '该社区/企事业单位已拓展人数',
                     icon: 'none'
                 })
-            } else if (Expand < EndExpand) {
+            } else if (Number(Expand) < Number(EndExpand)) {
                 wx.showToast({
                     title: '该社区/企事业单位已拓展人数不得大于该社区/企事业单位总人数',
                     icon: 'none'
