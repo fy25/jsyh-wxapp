@@ -41,10 +41,12 @@
     <view class="form-textarea">
         <textarea placeholder="在此添加活动内容" value="{{Remark}}" bindinput='contentInput' maxlength="-1"></textarea>
     </view>
-    <upload-img imgList="{{imgList}}" bind:myevent="chooseImg" bind:deleteTap="deleteTap"></upload-img>
+    <upload-img imgList="{{imgList}}" bind:myevent="chooseImg" bind:deleteTap="deleteImgTap"></upload-img>
     <view class="tit">链接:</view>
     <view class="form-input">
         <input type="text" placeholder="在此添加链接" value="{{Url}}" id="Url" bindinput='inputTap' />
     </view>
-    <button class="submit" disabled="{{submitting}}" catchtap="submitTap">{{edit?'修改活动':'提交活动'}}</button>
+    <button class="submit" disabled="{{submitting}}" catchtap="submitTap">
+        {{edit?'修改活动':'提交活动'}}
+    </button>
 </view>

@@ -13,21 +13,21 @@ Page({
         Begin_Date: "",
         End_Date: "",
         statelist: [{
-            value: "0",
-            label: "未开始"
-        },
-        {
-            value: "1",
-            label: "开始"
-        },
-        {
-            value: "2",
-            label: "结束"
-        },
-        {
-            value: "3",
-            label: "超时"
-        }
+                value: "0",
+                label: "未开始"
+            },
+            {
+                value: "1",
+                label: "开始"
+            },
+            {
+                value: "2",
+                label: "结束"
+            },
+            {
+                value: "3",
+                label: "超时"
+            }
         ],
         stateTextlist: ["未开始", "开始", "结束", "超时"],
         stateIndex: null,
@@ -40,9 +40,7 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
-        console.log(options)
-
+    onLoad: function(options) {
         let now = new Date()
         let end = utils.formatDate(now)
         this.data.options = options
@@ -97,11 +95,9 @@ Page({
     },
 
     chooseImg(e) {
-        console.log(e.detail.imgList, "111")
         this.data.Img = e.detail.imgList
     },
-    deleteTap(e) {
-        console.log(e.detail.imgList, "222")
+    deleteImgTap(e) {
         this.data.Img = e.detail.imgList
     },
     makeImg() {
@@ -110,19 +106,30 @@ Page({
             var tempImg = []
             if (Img != null && Img.length > 0) {
                 Img.forEach(item => {
-                    wx.getFileSystemManager().readFile({
-                        filePath: item, //选择图片返回的相对路径
-                        encoding: 'base64', //编码格式
-                        success: res => { //成功的回调
-                            tempImg.push(`data:image/png;base64,${res.data}`)
-                            if (tempImg.length == Img.length) {
-                                resolve(tempImg.join("|"))
+                    if (item.indexOf('https') != -1) {
+                        tempImg.push(item)
+                    } else {
+                        wx.getFileSystemManager().readFile({
+                            filePath: item, //选择图片返回的相对路径
+                            encoding: 'base64', //编码格式
+                            success: res => { //成功的回调
+                                tempImg.push(`data:image/png;base64,${res.data}`)
+                                if (tempImg.length == Img.length) {}
+                            },
+                            fail: (err) => {
+                                wx.showToast({
+                                    title: '上传图片出错',
+                                    icon: 'none',
+                                    duration: 1500
+                                })
                             }
-                        },
-                        fail: (err) => {
-                            console.log(err, "cuo")
-                        }
-                    })
+                        })
+
+                    }
+                    setTimeout(() => {
+                        resolve(tempImg.join("|"))
+                    }, 5000)
+
                 })
             } else {
                 resolve([])
@@ -149,19 +156,23 @@ Page({
         add.addAct(data).then(res => {
             let imgList = []
             let tempImg = []
-            console.log(res)
             if (res.IMG != "&nbsp;") {
-                console.log(res.IMG.indexOf(','))
                 if (res.IMG.indexOf(',') != -1) {
-                    console.log("多张图片")
                     tempImg = res.IMG
                     tempImg = tempImg.split(",")
-                    console.log(tempImg)
                     tempImg.forEach(item => {
-                        imgList.push(Config.serverUrl + item)
+                        if (item.indexOf('https') == -1) {
+                            imgList.push(Config.serverUrl + item)
+                        } else {
+                            imgList.push(item)
+                        }
                     })
                 } else {
-                    console.log("单张图片")
+                    if (res.IMG.indexOf('https') == -1) {
+                        imgList.push(Config.serverUrl + res.IMG)
+                    } else {
+                        imgList.push(res.IMG)
+                    }
                 }
             }
             let Activity_Name = res.ACTIVITY_NAME
@@ -173,7 +184,8 @@ Page({
                 Begin_Date,
                 Remark,
                 Url,
-                imgList
+                imgList,
+                Img: imgList
             })
         })
     },
@@ -232,6 +244,9 @@ Page({
                         }
                     })
                 }).catch(err => {
+                    wx.showToast({
+                        title: '提交失败'
+                    })
                     this.setData({
                         submitting: false
                     })

@@ -49,10 +49,18 @@ Page({
                     if (item.IMG.indexOf(",") != -1) {
                         let temp = item.IMG.split(",");
                         temp.forEach(item => {
-                            imgList.push(`${Config.serverUrl}${item}`);
+                            if (item.indexOf('https') == -1) {
+                                imgList.push(`${Config.serverUrl}${item}`);
+                            } else {
+                                imgList.push(`${item}`);
+                            }
                         });
                     } else {
-                        imgList.push(`${Config.serverUrl}${item.IMG}`);
+                        if (item.IMG.indexOf('https') == -1) {
+                            imgList.push(`${Config.serverUrl}${item.IMG}`);
+                        } else {
+                            imgList.push(`${item.IMG}`);
+                        }
                     }
                     item.imgList = imgList
 
