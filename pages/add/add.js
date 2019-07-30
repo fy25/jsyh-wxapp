@@ -13,21 +13,21 @@ Page({
         Begin_Date: "",
         End_Date: "",
         statelist: [{
-                value: "0",
-                label: "未开始"
-            },
-            {
-                value: "1",
-                label: "开始"
-            },
-            {
-                value: "2",
-                label: "结束"
-            },
-            {
-                value: "3",
-                label: "超时"
-            }
+            value: "0",
+            label: "未开始"
+        },
+        {
+            value: "1",
+            label: "开始"
+        },
+        {
+            value: "2",
+            label: "结束"
+        },
+        {
+            value: "3",
+            label: "超时"
+        }
         ],
         stateTextlist: ["未开始", "开始", "结束", "超时"],
         stateIndex: null,
@@ -40,7 +40,7 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function(options) {
+    onLoad: function (options) {
         let now = new Date()
         let end = utils.formatDate(now)
         this.data.options = options
@@ -114,7 +114,7 @@ Page({
                             encoding: 'base64', //编码格式
                             success: res => { //成功的回调
                                 tempImg.push(`data:image/png;base64,${res.data}`)
-                                if (tempImg.length == Img.length) {}
+                                if (tempImg.length == Img.length) { }
                             },
                             fail: (err) => {
                                 wx.showToast({
@@ -178,7 +178,12 @@ Page({
             let Activity_Name = res.ACTIVITY_NAME
             let Begin_Date = res.BEGIN_DATE
             let Remark = decodeURI(res.REMARK)
-            let Url = res.URL
+            let Url = null
+            if (res.URL == '&nbsp;') {
+                Url = ""
+            } else {
+                Url = res.URL
+            }
             this.setData({
                 Activity_Name,
                 Begin_Date,
